@@ -1,0 +1,46 @@
+.page_count {
+    float: left;
+    width: 100%;
+}
+.page_count ul {
+    float: right;
+    list-style: none outside none;
+    margin: 5px 0;
+    padding: 0;
+}
+.page_count ul li {
+    float: left;
+    padding: 3px;
+}
+.page_count ul li a {
+    color: #21759B;
+    text-decoration: none;
+    font-size: 13px;
+    font-family: 'quattrocento_sansregular';
+
+}
+.page_count ul li a.nxt {
+    /*background: url("../images/arrow.png") no-repeat scroll right center transparent;*/
+    color: #21759B;
+    font-size: 13px;
+    padding-right: 20px;
+    font-family: 'quattrocento_sansregular';
+}
+.page_count ul li a.pre:hover, .page_count ul li a.nxt:hover {
+    border-bottom:0px solid #99ccff;
+    color: #D54E21;
+}
+.page_count ul li a.pre {
+    /*background: url("../images/arrow_left.png") no-repeat scroll left center transparent;*/
+    color: #21759B;
+    font-size: 13px;
+    padding-left: 20px;
+    font-family: 'quattrocento_sansregular';
+}
+.page_count ul li a.selected, .page_count ul li a:hover {
+    color: #D54E21;
+    font-size: 13px;
+    font-family: 'quattrocento_sansregular';
+    border-bottom:1px solid #99ccff;
+}
+#ui-datepicker-div { display:none }

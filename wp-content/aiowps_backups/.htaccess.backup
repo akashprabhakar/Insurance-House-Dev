@@ -1,0 +1,19 @@
+
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /capm_production/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /capm_production/index.php [L]
+</IfModule>
+
+# END WordPress
+php_value upload_max_filesize 20M
+php_value post_max_size 20M
+#AddType application/docx .docx
+#AddType application/doc .doc
+#AddType application/pdf .pdf
+

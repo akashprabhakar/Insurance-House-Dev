@@ -1,0 +1,59 @@
+/*
+Theme Name: FHG Capm Theme
+Theme URI: http://annet.me/
+Author: Annet
+Author URI: http://annet.me/
+Description: Description
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: fhg-capm-theme
+Tags:
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+FHG CAPM Theme is based on Underscores http://annet.me/, (C) 2012-2015 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+*/
+/* =Reset
+-------------------------------------------------------------- */
+
+
+.home-images-banner{
+	background-image: url("/images/908913465_Image.jpg");
+}
+
+@media (min-width: 1024px)
+.col-md-8{
+	width:100%!important;
+}
+
+
+
+.newsletter-submit{
+margin-top: -30px !important;
+margin-left: 150px!important;
+position: relative!important;
+opacity: 0!important;
+}
+
+
+#cboxContent{
+	background-color:#000!important;
+}
+
+
+
+.wpcf7-form-control .wpcf7-submit .wysija-submit-field{
+	    margin-top: -40px!important;
+    position: absolute!important;
+    z-index: 999!important;
+    margin-left: 20px!important;
+    opacity: 0!important;
+}
+
+
