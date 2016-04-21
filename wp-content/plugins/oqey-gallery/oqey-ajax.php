@@ -448,6 +448,75 @@ function oQeyEditGalleryTitle(){
     
     die();
 }
+
+add_action( 'wp_ajax_oQeyEditGalleryArabTitle', 'oQeyEditGalleryArabTitle' );
+function oQeyEditGalleryArabTitle(){
+    global $wpdb;
+    $oqey_galls = $wpdb->prefix . "oqey_gallery";
+    if ( !current_user_can('oQeyGalleries') ) die(__('You do not have sufficient permissions to do this.'));
+
+    $gal_id   = absint(str_replace("gall_id_ar", "", $_POST['id'] ) );
+    $newtitle = stripslashes_deep(trim(urldecode($_POST["value"])));
+
+    if(!$sql=$wpdb->get_row($wpdb->prepare("SELECT * FROM $oqey_galls WHERE arabic_title = %s AND id != %d ",$newtitle, $gal_id))){ 
+        $title = $newtitle;
+    }else{
+        $sql=$wpdb->get_row($wpdb->prepare("SELECT * FROM $oqey_galls WHERE arabic_title = %s AND id != %d ",$newtitle, $gal_id));
+        $title = trim($sql->title.time());  
+    }
+ 
+    $wpdb->query( $wpdb->prepare("UPDATE $oqey_galls SET arabic_title = %s WHERE id= %d ", $title, $gal_id) );
+    
+    echo stripslashes_deep($title);
+    
+    die();
+}
+
+add_action( 'wp_ajax_oQeyEditGalleryEngDesc', 'oQeyEditGalleryEngDesc' );
+function oQeyEditGalleryEngDesc(){
+    global $wpdb;
+    $oqey_galls = $wpdb->prefix . "oqey_gallery";
+    if ( !current_user_can('oQeyGalleries') ) die(__('You do not have sufficient permissions to do this.'));
+
+    $gal_id   = absint(str_replace("gall_id_desc", "", $_POST['id'] ) );
+    $newtitle = stripslashes_deep(trim(urldecode($_POST["value"])));
+
+    if(!$sql=$wpdb->get_row($wpdb->prepare("SELECT * FROM $oqey_galls WHERE eng_desc = %s AND id != %d ",$newtitle, $gal_id))){ 
+        $title = $newtitle;
+    }else{
+        $sql=$wpdb->get_row($wpdb->prepare("SELECT * FROM $oqey_galls WHERE eng_desc = %s AND id != %d ",$newtitle, $gal_id));
+        $title = trim($sql->title.time());  
+    }
+ 
+    $wpdb->query( $wpdb->prepare("UPDATE $oqey_galls SET eng_desc = %s WHERE id= %d ", $title, $gal_id) );
+    
+    echo stripslashes_deep($title);
+    
+    die();
+}
+
+add_action( 'wp_ajax_oQeyEditGalleryArabDesc', 'oQeyEditGalleryArabDesc' );
+function oQeyEditGalleryArabDesc(){
+    global $wpdb;
+    $oqey_galls = $wpdb->prefix . "oqey_gallery";
+    if ( !current_user_can('oQeyGalleries') ) die(__('You do not have sufficient permissions to do this.'));
+
+    $gal_id   = absint(str_replace("gall_id_desc_ar", "", $_POST['id'] ) );
+    $newtitle = stripslashes_deep(trim(urldecode($_POST["value"])));
+
+    if(!$sql=$wpdb->get_row($wpdb->prepare("SELECT * FROM $oqey_galls WHERE arab_desc = %s AND id != %d ",$newtitle, $gal_id))){ 
+        $title = $newtitle;
+    }else{
+        $sql=$wpdb->get_row($wpdb->prepare("SELECT * FROM $oqey_galls WHERE arab_desc = %s AND id != %d ",$newtitle, $gal_id));
+        $title = trim($sql->title.time());  
+    }
+ 
+    $wpdb->query( $wpdb->prepare("UPDATE $oqey_galls SET arab_desc = %s WHERE id= %d ", $title, $gal_id) );
+    
+    echo stripslashes_deep($title);
+    
+    die();
+}
 /*END Edit gallery title*/
 
 /*CREATE new gallery*/
@@ -463,22 +532,30 @@ $resp["response"] = "";
 $resp["galid"]    = '';
 $resp["last_gal"] = '';
         
-if($_POST["newtitle"] != ""){ 
+if($_POST["newtitle"] != "" && $_POST["eventdate"] != ""){ 
 
 $folder = sanitize_title(urldecode($_POST["newtitle"]));
 $newtitle = esc_sql(stripslashes_deep(trim(urldecode($_POST["newtitle"]))));
 $arabicnewtitle = esc_sql(stripslashes_deep(trim(urldecode($_POST["arabicnewtitle"]))));
+$engdesc = esc_sql(stripslashes_deep(trim(urldecode($_POST["engdesc"]))));
+$arabdesc = esc_sql(stripslashes_deep(trim(urldecode($_POST["arabdesc"]))));
+$eventdate = esc_sql(stripslashes_deep(trim(urldecode($_POST["eventdate"]))));
+
+$eventdate = date('Y-m-d', strtotime($eventdate));
+
 
 if(!$sql=$wpdb->get_row($wpdb->prepare("SELECT * FROM $oqey_galls WHERE title = %s ",$newtitle ))){
 
 if($wpdb->get_row($wpdb->prepare("SELECT * FROM $oqey_galls WHERE folder = %s ", $folder ))){ $folder = $folder.time(); }
-
-$add = $wpdb->query( $wpdb->prepare( "INSERT INTO $oqey_galls (title, author, folder,arabic_title) 
-                                           VALUES ('%s', '%d', '%s','%s' )",
+$add = $wpdb->query( $wpdb->prepare( "INSERT INTO $oqey_galls (title, author, folder,arabic_title,eng_desc,arab_desc,event_date) 
+                                           VALUES ('%s', '%d', '%s','%s', '%s','%s','%s')",
                                            $newtitle,
                                            $current_user->ID,
                                            $folder,
-                                           $arabicnewtitle
+                                           $arabicnewtitle,
+                                           $engdesc,
+                                           $arabdesc,
+                                           $eventdate
                                    )
                                    );
 $lastid = $wpdb->insert_id; //mysql_insert_id();
@@ -504,7 +581,11 @@ $resp["response"] .= __('Error, try again please', 'oqey-gallery');
 $resp["response"] .= __('Gallery already exist', 'oqey-gallery');
 }
 }else{
-$resp["response"] .= __('Title missing', 'oqey-gallery'); 
+if($_POST["newtitle"] == ''){
+    $resp["response"] .= __('Title missing', 'oqey-gallery');
+}else if($_POST["eventdate"] == ''){
+    $resp["response"] .= __('Event Date Empty', 'oqey-gallery');
+}
 }
 echo json_encode($resp);
 
@@ -615,6 +696,9 @@ if(!is_dir($f)){
 
 $resp["galid"]       .= esc_sql($_POST['newgallid']);
 $resp["titlul"]      .= $gal->title;
+$resp["titlularab"]      .= $gal->arabic_title;
+$resp["englishdesc"]      .= $gal->eng_desc;
+$resp["arabicdesc"]      .= $gal->arab_desc;
 $resp["noflashinfo"]  = base64_encode($datele);
 $resp["folder"]      .= $gal->folder;
 $resp["folderexist"] .= $folderexist;
@@ -754,8 +838,8 @@ function oQeyGetAllImages(){
 
 
    //<img src="'.oQeyPluginUrl().'/images/separator_line.png" width="120" height="2" align="middle" class="img_thumbs_top_line"/>
-
-   $resp["allimages"] .= '
+ //<a href="'.trim($previewimg).'" class="'.$gclass.'" title="'.$img->alt.'" rel="youtube">
+    $resp["allimages"] .= '
                        <li id="img_li_'.$img->id.'"'.$b.'>
                            <div class="allbut" align="center">
                        '.$delete.'                       
@@ -765,7 +849,7 @@ function oQeyGetAllImages(){
                        '.$croper.'
                    <input name="selected" type="checkbox" value="'.$img->id.'" class="styled" id="selected_'.$img->id.'">
                    </div>
-                               <a href="'.trim($previewimg).'" class="'.$gclass.'" title="'.$img->alt.'" rel="youtube">
+                              
                    <img src="'.$fullimg.'?'.time().'" alt="image_'.$img->id.'" class="img_thumbs" />
                                </a>
                        </li>';
@@ -2086,6 +2170,22 @@ function oQeyEditVideoDescription(){
     die();
 }
 /*END Edit description title*/
+
+add_action( 'wp_ajax_oQeyEditVideoDate', 'oQeyEditVideoDate' );
+function oQeyEditVideoDate(){
+    global $wpdb;
+    $oqey_video = $wpdb->prefix . "oqey_video";
+  
+  $oqey_video_desc = $wpdb->prefix . "video_desc";
+
+    $id   = absint(str_replace("video_date_", "", $_POST['id']));
+    $date = stripslashes_deep(trim(urldecode($_POST["value"])));
+    $date = date('Y-m-d',  strtotime($date));
+    $wpdb->query( $wpdb->prepare("UPDATE $oqey_video SET event_date = %s WHERE id = %d ", $date, $id) );
+    echo stripslashes_deep($date);
+
+    die();
+}
 
 /*undo video*/
 add_action( 'wp_ajax_oQeyFromTrashVideo', 'oQeyFromTrashVideo' );

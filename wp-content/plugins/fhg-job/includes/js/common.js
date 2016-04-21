@@ -10,6 +10,9 @@ jQuery(document).ready(function() {
     $('#submit').click(function() {
         jQuery('#addtag').validate();
     });
+
+
+    
 });
 /* ]]> */
 

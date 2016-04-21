@@ -20,7 +20,7 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'fhg_capm_nov2515');
+define('DB_NAME', 'insurance_house_dev');
 
 /** MySQL database username */
 define('DB_USER', 'php');
@@ -63,7 +63,7 @@ define('NONCE_SALT',       ' vUsH10hBM:5,Q,ADlu|[jq1|R/UfflULD6/|WmYt)Q3@C-AF@yi
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix  = 'fhg_capm_';
+$table_prefix  = 'fhg_fh_';
 
 /**
  * For developers: WordPress debugging mode.
@@ -78,6 +78,7 @@ $table_prefix  = 'fhg_capm_';
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 define('WP_DEBUG', false);
+define('FS_METHOD','direct');
 
 /* That's all, stop editing! Happy blogging. */
 
@@ -88,3 +89,7 @@ if ( !defined('ABSPATH') )
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');//Disable File Edits
 define('DISALLOW_FILE_EDIT', true);
+
+
+define ('EMPTY_TRASH_DAYS', 7);
+define( 'WP_POST_REVISIONS', 3 );

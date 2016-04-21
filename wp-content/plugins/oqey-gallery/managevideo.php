@@ -306,7 +306,8 @@ if(isset($_GET['scaner'])){
         
 		<?php
 		$video_id=$video->id;
-			$videosDesc = $wpdb->get_results("SELECT * FROM $oqey_video_desc WHERE video_id = $video_id ORDER BY video_id DESC");
+			$videosDesc = $wpdb->get_results("SELECT vd.*,event_date FROM  $oqey_video ov JOIN $oqey_video_desc vd on ov.id=vd.video_id WHERE video_id = $video_id ORDER BY vd.video_id DESC");
+                        
 			if(!empty($videosDesc)){
 				foreach($videosDesc as $vdesc){
 					?>
@@ -327,6 +328,7 @@ if(isset($_GET['scaner'])){
 			 <td valign="top"><?php _e('Description', 'oqey-gallery'); ?>:</td>
 			 <td><span class="dblclickdesc" id="video_desc_<?php echo $vdesc->wp_video_desc_id; ?>"><?php echo $vdesc->wp_desc; ?></span></td>
 		   </tr>
+                   
 		   </table> 
         </div>
         </div>
@@ -347,6 +349,10 @@ if(isset($_GET['scaner'])){
       <a href="#null" onclick="VideoDelete('<?php echo $video->id; ?>', '<?php echo $video->video_link; ?>'); return false;" class="hiddenm">
       <img src="<?php echo oQeyPluginUrl(); ?>/images/remove_button.png" width="22" height="22" title="<?php _e('Move to trash this video', 'oqey-gallery'); ?>"/></a>    
     </td>
+  </tr>
+  
+  <tr>		 <td valign="top"><?php _e('Date', 'oqey-gallery'); ?>:</td>
+		 <td><span class="dblclickdate" id="video_date_<?php  echo $video->id; ?>"><?php echo $vdesc->event_date; ?></span></td>
   </tr>
   <?php $i++; //hiddenm
     
@@ -687,6 +693,20 @@ jQuery(".vedit").click(function(){
 	        height : "40px",
             submit     : 'Save',
             submitdata : function ( value, settings ) { return { "action": 'oQeyEditVideoDescription' }; }
+   });
+   
+        
+     jQuery(".dblclickdate").editable( ajaxurl, { 
+            indicator  : '<?php _e('Updating...', 'oqey-gallery'); ?>',
+            type       : 'textarea',
+            tooltip    : "<?php _e('Double-click to add date...', 'oqey-gallery'); ?>",
+            placeholder: "<?php _e('Double-click to add date...', 'oqey-gallery'); ?>",
+            event      : "dblclick",
+            style      : "inherit",
+	        width  : "470px",
+	        height : "40px",
+            submit     : 'Save',
+            submitdata : function ( value, settings ) { return { "action": 'oQeyEditVideoDate' }; }
    });
    
    /*import from others galleries*/

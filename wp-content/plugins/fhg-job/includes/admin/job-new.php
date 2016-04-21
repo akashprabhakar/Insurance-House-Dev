@@ -8,7 +8,7 @@ $header = "Add New Job";
 if ($act == "upd") {
   $recid = $_REQUEST["job_id"];
   $arrresult = $objMem->select_job_table($recid);
-
+print_r($arrresult);
   if (count($arrresult) > 0) {
     $header = "Edit Job";
     $job_title = $arrresult['job_title'];
@@ -20,6 +20,7 @@ if ($act == "upd") {
     $job_description_ar = $arrresult['job_description_ar'];
     $job_display_to_date = $arrresult['job_display_to_date'];
     $job_hr_email = $arrresult['job_hr_email'];
+    $imageurl = $arrresult['imageurl'];
     if ($job_display_to_date != "0000-00-00") {
       $job_display_to_date = str_replace('-', '/', $job_display_to_date);
       $job_display_to_date = date('m-d-Y', strtotime($job_display_to_date));
@@ -107,6 +108,13 @@ $job_id = $_GET['job_id'];
             wp_editor($job_description_ar, "my_editor_2", $args);
             ?>
           </td>
+        </tr>
+        <tr valign="top">
+          <th scope="row"><label>Add Image</label></th>
+          <td>
+            <input type="file" class="required" name="image_url" id="image_url" value="<?php echo $imageurl; ?>"/>
+            <p>Uploaded Image: <img src="<?php echo plugins_url().'/fhg-job/includes/uploads/'.$imageurl?>" alt="careers"></p>
+        </td>
         </tr>
         <tr valign="top">
           <th scope="row"><label >Display Till Date:</label></th><td><input type="text" name="job_display_to_date" id="job_display_to_date" readonly="true" autocomplete="off" value="<?php echo $job_display_to_date; ?>" size="45" /><br/><br/></td>

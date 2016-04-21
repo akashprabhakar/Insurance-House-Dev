@@ -1,0 +1,70 @@
+.nav-tabs.creditcompare > li.current-page-ancestor.current-page-parent a {
+    color: #7d7d7d;
+}
+.nav-tabs.creditcompare > li.current-page-ancestor.current-page-parent a:after {
+    background-image: url(../images/CreditCardTabsImg.png);
+}
+/*.slide-out-div1 .handle1{
+	margin-left: -40px \9;
+}
+.slide-out-div1 .socicons{
+	margin-left: -45px \9;
+}
+.slide-out-div1 .nav-social{
+	margin-left: -20px \9;
+}
+.slide-out-div1{
+	margin-left: -50px \9;
+}*/
+
+.slide-out-div1{
+	box-sizing: content-box;
+	border-radius: 0px;
+	position:relative;
+	
+}
+.slide-out-div1 .ajaxloader {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+.overviewBoxes .thumbnail{
+	height: 100% \9;
+}
+html, body{
+	-ms-overflow-style: scrollbar;
+}
+
+
+
+
+.topMenuMainbox .mob_lang_online{
+	display:none;
+	}
+/*.overviewBoxes .row .tblBox{
+	display:block;
+	float:left;
+	width:25%;
+	}*/
+
+.slide-out-div a.handle{
+	background: url("../images/contactUsHomepage.png") no-repeat;
+	width:41px;
+}
+
+.slide-out-div.open a.handle{
+	background: url("../images/contactUsHomepageOpen.png") no-repeat;
+}
+
+
+/*--style-class-for-ie8--*/
+.ie8 .slide-out-div1{
+	background-image: url("../images/homecontactbg.png");
+}
+.ie8 .slide-out-div1 .handle1{
+	border-top-left-radius: 10px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 10px;
+}
+/*--style-class-for-ie8--*/

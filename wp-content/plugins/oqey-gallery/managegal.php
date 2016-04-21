@@ -41,9 +41,13 @@ var actionlink  = "<?php echo oQeyPluginUrl()?>";
 <?php _e('Create a new gallery:', 'oqey-gallery'); ?>
     <br/>
   <input placeholder="English Title" name="newtitle" id="newtitle" /> 
+  <input placeholder="English Description" name="engdesc" id="engdesc" /> 
   <br/>
   <input placeholder="Arabic Title" name="arabicnewtitle" id="arabicnewtitle" />
-   <br/>
+  <input placeholder="Arabic Description" name="arabdesc" id="arabdesc" /> 
+  <br/>
+  Event Date: <input type=date name="eventdate" id="eventdate" placeholder="mm/dd/yyyy">
+  <br/>
   <input class="button" type="button" name="creategall" id="creategall" value="<?php _e('Create', 'oqey-gallery'); ?>"/>
 </div>
 <div id="messages" style=" float:left;">&nbsp;</div>
@@ -63,6 +67,16 @@ var actionlink  = "<?php echo oQeyPluginUrl()?>";
     <div id="titlul">
         <div class="obis"><?php _e('Loading content...', 'oqey-gallery'); ?></div>
     </div>
+     <div id="engdescback" class="titlulcs">
+        <div class="obis"><?php _e('Loading content...', 'oqey-gallery'); ?></div>
+    </div>
+    <div id="titlularab" class="titlulcs">
+        <div class="obis"><?php _e('Loading content...', 'oqey-gallery'); ?></div>
+    </div>
+     <div id="arabdescback" class="titlulcs">
+        <div class="obis"><?php _e('Loading content...', 'oqey-gallery'); ?></div>
+    </div>
+
 </div>
 
 <div class="postbox" style="width:900px;">
@@ -106,7 +120,7 @@ var actionlink  = "<?php echo oQeyPluginUrl()?>";
 <script type="text/javascript">
 
 jQuery(document).ready(function($){    
-    
+  
     var ds = ds || {};
   var media;
   ds.media = media = {
@@ -198,7 +212,8 @@ jQuery.loadImages([ '<?php echo oQeyPluginUrl().'/images/preview_button.png'; ?>
                     '<?php echo oQeyPluginUrl().'/images/ui-icons_454545_256x240.png'; ?>', 
                     '<?php echo oQeyPluginUrl().'/images/ui-icons_888888_256x240.png'; ?>' ],function(){});
 
-/*loading galleries*/ //oQeyGetAllGalleries 
+/*loading galleries*/ //oQeyGetAllGalleries
+
 jQuery.post( ajaxurl, {action: 'oQeyGetAllGalleries', allgalls: "yes" }, function(data){
     
     jQuery('#content').hide().html(data).fadeIn("slow");
@@ -271,9 +286,13 @@ jQuery('#newtitle').keypress(function(e){
 jQuery("#creategall").click(function(){ 
     var newtitle = jQuery("#newtitle").val();
     var arabicnewtitle = jQuery("#arabicnewtitle").val();
-    jQuery.post( ajaxurl, { action:"oQeyNewGallery", newtitle: newtitle, arabicnewtitle:arabicnewtitle },
+    var engdesc = jQuery("#engdesc").val();
+    var arabdesc = jQuery("#arabdesc").val();
+    var eventdate = jQuery("#eventdate").val();
+
+    jQuery.post( ajaxurl, { action:"oQeyNewGallery", newtitle: newtitle, arabicnewtitle:arabicnewtitle, engdesc:engdesc , arabdesc:arabdesc, eventdate:eventdate },
     function(html){
-    
+        
          var data = eval('(' + html + ')');
 
          if(data.response=="Created"){
@@ -281,6 +300,8 @@ jQuery("#creategall").click(function(){
              jQuery("#messages").hide().html(decodeURIComponent('<p class="updated fade">' + data.response + '<\/p>')).fadeIn("slow");
              jQuery('#newtitle').attr('value', '');
              jQuery('#arabicnewtitle').attr('value', '');
+             jQuery('#engdesc').attr('value', '');
+             jQuery('#arabdesc').attr('value', '');
              clearDiv();
              
              if(getGalleryDetails(data.galid)){
@@ -486,30 +507,29 @@ function SaveVideoImage(){
     <p id="p_splash"><input name="splash" id="splash" type="checkbox" class="splash"/> &nbsp; <?php _e('Set this photo as a gallery splash.', 'oqey-gallery'); ?></p>
   <p id="p_splashexclusive"><input name="splashexclusive" id="splashexclusive" class="splashexclusive" type="checkbox"/> &nbsp; <?php _e('Make it splash exclusive.', 'oqey-gallery'); ?></p>    
   <p>
-  <?php _e('Description', 'oqey-gallery'); ?> (alt):<br/>
+  <?php _e('English Title', 'oqey-gallery'); ?>:<br/>
   <textarea name="alt" id="alt" class="alt" style="height:60px; width:550px;"></textarea>
   </p>
     
   <p>
-  <?php _e('Comments', 'oqey-gallery'); ?> :<br/>
+   <?php _e('English Description', 'oqey-gallery'); ?> :<br/>
   <textarea name="comments" id="comments" class="comments" style="height:75px; width:550px;"></textarea>
   </p>
     
     <p>English Link <small>(ex: http://oqeysites.com), * <?php _e('.', 'oqey-gallery'); ?></small><br />
     <input type="text" name="oqey_image_link" id="oqey_image_link" style="width:550px;" value="" /></p>
-  <p>
-  <p>Arabic Link <small>(ex: http://oqeysites.com), * <?php _e('', 'oqey-gallery'); ?></small><br />
-    <input type="text" name="oqey_image_arabiclink" id="oqey_image_arabiclink" style="width:550px;" value="" /></p>
-  <p>
+ 
          <p>
-  <?php _e('Arabic Description', 'oqey-gallery'); ?> :<br/>
+   <?php _e('Arabic Title', 'oqey-gallery'); ?> :<br/>
   <textarea name="oqey_arabic_description" id="oqey_arabic_description" class="alt" style="height:60px; width:550px;"></textarea>
   </p>
         
         <p>
-  <?php _e('Arabic Comments', 'oqey-gallery'); ?> :<br/>
+  <?php _e('Arabic Description', 'oqey-gallery'); ?> :<br/>
   <textarea name="oqey_arabic_comments" id="oqey_arabic_comments" class="comments" style="height:75px; width:550px;"></textarea>
   </p>
+  <p>Arabic Link <small>(ex: http://oqeysites.com), * <?php _e('', 'oqey-gallery'); ?></small><br />
+    <input type="text" name="oqey_image_arabiclink" id="oqey_image_arabiclink" style="width:550px;" value="" /></p>
 
 <!--   <p><?php _e('Insert Video', 'oqey-gallery'); ?>
     <label><input type="radio" name="uploadrad" value="Upload Url"> Upload Video</label>

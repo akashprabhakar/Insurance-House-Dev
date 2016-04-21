@@ -83,7 +83,13 @@ function fhg_lp_meta_box_callback( $post ) {
       if ( "4" == $fhg_current_landing_section ){ $fhg_lp_section_select_field .= 'selected';} 
       $fhg_lp_section_select_field .= ">Section 4</option>  <option value='5' "; 
       if ( "5" == $fhg_current_landing_section ){ $fhg_lp_section_select_field .= 'selected';} 
-      $fhg_lp_section_select_field .= ">Section 5</option>
+      $fhg_lp_section_select_field .= ">Section 5</option> <option value='6' "; 
+      if ( "6" == $fhg_current_landing_section ){ $fhg_lp_section_select_field .= 'selected';} 
+      $fhg_lp_section_select_field .= ">Section 6</option> <option value='7' "; 
+      if ( "7" == $fhg_current_landing_section ){ $fhg_lp_section_select_field .= 'selected';} 
+      $fhg_lp_section_select_field .= ">Section 7</option> <option value='8' "; 
+      if ( "8" == $fhg_current_landing_section ){ $fhg_lp_section_select_field .= 'selected';} 
+      $fhg_lp_section_select_field .= ">Section 8</option>
     </select>";
       echo $fhg_lp_section_select_field;
 echo "</td>

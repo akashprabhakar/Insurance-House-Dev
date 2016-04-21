@@ -1,0 +1,78 @@
+@media screen and (min-width: 320px) and (max-width: 767px) {
+.center p{padding: 0 15px 60px;}
+.socialMediaLabel{ display:none;}
+#bottom{padding: 40px 15px;}
+#bottom .socialMediaContainer{ float:left; width:100%;}
+#bottom .socialMediaContainer .socialmediaicons{ margin:20px 0 0;}
+#footer p{ text-align:center;}
+#footer .footerLink p{ text-align:center; width:100%;}
+#footer .footerLink{ margin:0 0 10px;}
+.newslettersubscribe .inputForm input{ width:77%;}
+.newslettersubscribe .inputForm{ width:100%;}
+.leftNewsBox{ width:100%;}
+#footer ul{ padding:0 15px;}
+.contactUsLabel{ display:none;}
+.recent-work-wrap .recent-work-inner h3{ font-size:26px;}
+#recent-works .box10{ margin-top:0px;}
+.recent-work-wrap .recent-work-inner{padding: 15px;}
+#recent-works .item img {width: 100%;}
+#recent-works .box1 {width: 100%;float:left; height:auto;}
+#recent-works .box2 {width: 100%; float:left;}
+#recent-works .box3 {width: 100%; float:left;}
+#recent-works .box4{ width:100%; float:left;}
+#recent-works .box5{width: 100%; float:left;}
+#recent-works .box6{width: 100%; float:left;}
+#recent-works .box7{width: 100%; float:left;}
+#recent-works .box8{width: 100%; float:left;}
+#recent-works .box9{width: 100%; float:left;}
+#recent-works .box10{ margin-top:0; width:100%; float:left;}
+#recent-works .boxContainer{ padding:0 15px;}
+.newsSection{ padding:0 15px;}
+#footer{ padding:15px;}
+.rightNewsBox{ padding:0px;}
+}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+@media screen and (min-width: 768px) and (max-width: 1023px){
+.socialMediaLabel{ display:none;}	
+.contactUsLabel{ display:none;}
+.center p{padding: 0 15px 60px;}
+#recent-works .boxContainer{ padding:0 15px;}
+#conatcat-info .newslettersubscribe{ margin:20px 0 0;}
+#footer{ padding:15px;}
+#footer p{ text-align:center; margin: 20px 0 0;}
+#footer .footerLink p{ text-align:center; width:100%;}
+#bottom{padding: 40px 15px;}
+.newslettersubscribe .inputForm input{ width:338px;}
+#bottom .socialMediaContainer{ float:left; width:100%;}
+#bottom .socialMediaContainer .socialmediaicons{ margin:0px;}
+#recent-works .item img {width: 100%;}
+#recent-works .box1 {width: 100%;float:left; height:auto;}
+#recent-works .box2 {width: 50%; float:left;}
+#recent-works .box3 {width: 50%; float:left;}
+#recent-works .box4{ width:100%; float:left;}
+#recent-works .box5{width: 50%; float:left;}
+#recent-works .box6{width: 50%; float:left;}
+#recent-works .box7{width: 50%; float:left;}
+#recent-works .box8{width: 50%; float:left;}
+#recent-works .box9{width: 50%; float:left;}
+#recent-works .box10{ margin-top:0; width:100%; float:left;}
+.box7 .recent-work-wrap .recent-work-inner{top:42%;}
+.newsSection{ padding:0 15px;}
+#bottom .column{width: 30%; margin: 0 0 30px;}
+.rightNewsBox{ padding:0px;}
+}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 1024px) and (orientation: landscape){
+.center p{padding: 0 15px 60px;}	
+#recent-works .boxContainer{ padding:0 15px;}	
+.newsSection{ padding:0 15px;}
+#bottom{ padding:40px 15px ;}
+/*#footer{ padding:15px;}*/
+#footer .footerInner{ padding:0 15px;}
+#bottom .column{width: 25%;margin: 0 5% 30px 0;}
+#bottom .socialMediaContainer{ float:left;}
+.contactUsLabel{ display:none;}
+.box7 .recent-work-wrap .recent-work-inner{padding: 20px 15px;}
+.recent-work-wrap img{width: auto;}
+}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/

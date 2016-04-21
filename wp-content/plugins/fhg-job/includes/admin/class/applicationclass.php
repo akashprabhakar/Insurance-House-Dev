@@ -98,10 +98,29 @@ class applicationClass {
     return $arrresult;
   }
 
+  function select_settings_table($recid) {
+    global $wpdb;
+    $sql = "select * from " . SETTINGS_TABLENAME;
+    $arrresult = $wpdb->get_row($sql, ARRAY_A);
+    return $arrresult;
+  }
+
   function delete_application_table($delid) {
     global $wpdb;
-    echo $delete_data = "delete from " . APP_TABLENAME . " where applicationid=$delid";
+    $delete_data = "delete from " . APP_TABLENAME . " where applicationid=$delid";
     $wpdb->query($delete_data);
+  }
+
+  function update_settings_table($data){
+    global $wpdb;
+    $hr_email_address = $data['hr_email'];
+    $hr_id = $data['hr_id'];
+
+     $sql = "UPDATE " . SETTINGS_TABLENAME . " SET `hr_email`='$hr_email_address' WHERE  `id`='$hr_id'";
+     $insert = $wpdb->query($sql);
+     if($insert){
+      return true;
+    }
   }
 
 }

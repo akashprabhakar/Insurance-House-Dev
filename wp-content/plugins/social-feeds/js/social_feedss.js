@@ -1,30 +1,29 @@
 $ = jQuery.noConflict();
 
 $(window).load(function () {
-
+  $(".closeBtn").hide();
+  $('.mobilesocialicons').hide();
       $('.feed-facebook').show();
     $('.feed-twitter').hide();
     $('.feed-linkedin').hide();
-    $('.feed-youtube').hide();
+    $('.getYoutube').hide();
     $('.feed-instagram').hide();
 
  
-  $('a.facebook').hover(function() {
-           
+  $('a.facebook').hover(function() {           
     $('.feed-facebook').show();
     $('.feed-twitter').hide();
     $('.feed-linkedin').hide();
-    $('.feed-youtube').hide();
+    $('.getYoutube').hide();
     $('.feed-instagram').hide();
 
 });
   
-  $('a.twitter').hover(function() {
-     
+  $('a.twitter').hover(function() {     
     $('.feed-facebook').hide();
     $('.feed-twitter').show();
     $('.feed-linkedin').hide();
-    $('.feed-youtube').hide();
+    $('.getYoutube').hide();
     $('.feed-instagram').hide();
 });
   $('a.linkedin').hover(function(){
@@ -32,7 +31,7 @@ $(window).load(function () {
          $('.feed-facebook').hide();
                 $('.feed-twitter').hide();
                 $('.feed-linkedin').show();
-                $('.feed-youtube').hide();
+                $('.getYoutube').hide();
                  $('.feed-instagram').hide();
   }); 
    $('a.youtube').hover(function() {
@@ -40,7 +39,7 @@ $(window).load(function () {
              $('.feed-facebook').hide();
                 $('.feed-twitter').hide();
                 $('.feed-linkedin').hide();
-                $('.feed-youtube').show();
+                $('.getYoutube').show();
                  $('.feed-instagram').hide();
         });
    $('a.instagram').hover(function(){
@@ -48,16 +47,40 @@ $(window).load(function () {
           $('.feed-facebook').hide();
                 $('.feed-twitter').hide();
                 $('.feed-linkedin').hide();
-                $('.feed-youtube').hide();
+                $('.getYoutube').hide();
                  $('.feed-instagram').show();
   });
-
-
-
+  if($( window ).width() > 1024){
+  $(".fa").click(function (){
     socialFeedsAjax();
-   // allsocialFeedsAjax();
+  });
+  
 
-    
+} else {
+  $('.mobilesocialicons').show();
+  socialFeedsAjax();
+  $(".social-anchor").click(function (){
+
+    if(!$( ".socialmediafeed_container .slide-out-div1" ).hasClass( "open" )) {
+      $('.socialmediafeed_container .slide-out-div1').toggle();
+       // allsocialFeedsAjax();
+      $('.socialmediafeed_container .slide-out-div1').addClass('open');
+      $(".closeBtn").show();
+    }
+  });
+
+  $(".closeBtn").click(function (){
+
+    if($( ".socialmediafeed_container .slide-out-div1" ).hasClass( "open" )) {
+      $('.socialmediafeed_container .slide-out-div1').hide();
+      $(".closeBtn").hide();
+      $('.slide-out-div1').removeClass('open');
+    }
+  });
+
+}
+
+
 });
 
 

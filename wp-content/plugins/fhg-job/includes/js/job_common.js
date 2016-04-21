@@ -65,6 +65,66 @@ $(document).ready(function() {
 
     });
 
+//carrer registration validation starts
+
+
+  // apply now form validation here..
+// new FormValidator('sendresume', [{
+//     name: 'firstname',
+//     rules: 'required'
+// }], function(errors, event) {
+//     if (errors.length > 0) {
+//         // Show the errors
+//         alert("errors");
+//         var errorString = '';
+
+//         for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+//             errorString += errors[i].message + '<br />';
+//         }
+
+//         error_box.innerHTML = errorString;
+//     }
+//     else {
+//       alert("not");
+//     }
+// });
+$("#addtag2").submit(function(e){
+        e.preventDefault();
+    }).validate({
+        debug: true,
+    onkeyup: false,
+        errorElement: "em",
+            rules: {
+            firstname: {
+                required: true,
+                minlength: 4
+            },
+            lastname: "required",
+        },
+    
+        errorPlacement: function(error, element) {
+       error.appendTo(element.parent("div").find("span.errText"));
+   },
+        messages : {
+            firstname: "Please enter First name",
+
+            lastname: "Please enter valid 'Full Name' only",
+
+            // mnth: "Please select date of birth",
+            // yr: "Please select date of birth",
+            // relgn: "Please select your religion",
+            // lang: "Please specify your mother tongue",
+            // contry: "Please select your country",
+            // mob: "Please enter valid mobile number",
+            // agree: "Please accept Terms &  conditions ",
+        },
+            submitHandler: function(form) {
+              
+                    form.submit();  
+                      
+                                            
+            }
+        });
 
 });
 

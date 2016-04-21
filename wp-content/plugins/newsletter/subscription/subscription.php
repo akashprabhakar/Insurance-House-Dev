@@ -1015,9 +1015,9 @@ class NewsletterSubscription extends NewsletterModule {
          $url = $_SERVER['REQUEST_URI']; //to get the current url
          if (strstr($url, '/ar/') !== false) //check if '?' is present
          {
-          $buffer .= "\n\t" . '' . $options_profile['email'] . '' . "\n\t" . '<input class="newsletter-email" type="email" name="ne" placeholder="أدخل عنوان بريدك الإلكتروني" size="30" required>' . "\n" . '' . "\n\n" . ' <button class="btnInput" type="button"><img src="' . INC_URL_IMG . DS. 'icon-email.png'. '"'. 'width="15" height="13" alt=""/></button>' ;
+          $buffer .= "\n\t" . '' . $options_profile['email'] . '' . "\n\t" . '<input class="newsletter-email" type="email" name="ne" placeholder="أدخل عنوان بريدك الإلكتروني" size="30" required>' . "\n" . '' . "\n\n";
          }else{
-                 $buffer .= "\n\t" . '' . $options_profile['email'] . '' . "\n\t" . '<input class="newsletter-email" type="email" name="ne" placeholder="enter your email" size="30" required>' . "\n" . '' . "\n\n" . ' <button class="btnInput" type="button"><img src="' . INC_URL_IMG . DS. 'icon-email.png'. '"'. 'width="15" height="13" alt=""/></button>' ;   
+                 $buffer .= "\n\t" . '' . $options_profile['email'] . '' . "\n\t" . '<input class="newsletter-email" type="email" name="ne" placeholder="enter your email to subscribe our monthly newsletter" size="30" required>' . "\n" . '' . "\n\n";   
          }
 
 
@@ -1109,13 +1109,13 @@ class NewsletterSubscription extends NewsletterModule {
             $buffer .= "\n\t</td>\n</tr>\n\n";
         }
 
-        $buffer .= "\n\t" . '<td colspan="2" class="newsletter-td-submit">' . "\n";
+        //$buffer .= "\n\t" . '<td colspan="2" class="newsletter-td-submit">' . "\n";
 
         if (strpos($options_profile['subscribe'], 'http://') !== false) {
             $buffer .= "\t\t" . '<input class="newsletter-submit-image" type="image" src="' . INC_URL_IMG . DS. 'icon-email.png'. ' "/>' . "\n\t\n\n\n";
         } else {
             //prabhakar
-         $buffer .= "\t\t" . '<input class="newsletter-submit"  style="margin-top: -35px !important;margin-left: 180px!important;position: relative!important;opacity: 0!important;width:80px!important" type="submit" value="' . $options_profile['subscribe'] . '"/>' . "\n\t\n\n\n";
+         $buffer .= "\t\t" . '<input class="newsletter-submit-custom"  type="submit" value="' . $options_profile['subscribe'] . '"/>' . "\n\t\n\n\n";
         }
 
         $buffer .= "\n</form>\n</div>";

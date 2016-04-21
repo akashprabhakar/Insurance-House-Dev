@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: Board of directors
-  Plugin URI: http://www.retransform.com/
+  Plugin URI: http://www.annet.com/
   Description: Board of directors
   Author: Annet #2049
   Version: 1.0
@@ -42,7 +42,7 @@ function register_custom_post_type() {
       'query_var' => true,
       'show_in_menu' => true,
       'show_ui' => true,
-   // 'show_in_menu' => 'annet-fhg-capm-all/index.php',
+      // 'show_in_menu' => 'annet-fhg-capm-all/index.php',
       'supports' => array(
           'title',
           'author',
@@ -56,21 +56,61 @@ function register_custom_post_type() {
   add_theme_support('post-thumbnails');
 }
 
+// function getBoardOfDirectors() {
+  // global $post;
+  // // $type = 'board-of-directors';
+
+  // global $wpdb;
+  // $args_post = array(
+      // 'numberposts' => -1,
+      // 'post_type' => 'board-of-directors',
+      // 'post_status' => 'publish',
+  // );
+  // $survey_page = get_posts($args_post);
+
+  // $html = '<div class="boarddirectorBoxes">';
+  // foreach ($survey_page as $value) {
+    // $board_of_directors = get_post_meta($value->ID, 'meta_box_info', true);
+    // $board_of_directors_ar = get_post_meta($value->ID, 'meta_box_info_ar', true);
+    // $designation = custom_translate($board_of_directors, $board_of_directors_ar);
+    // $url_bod = SITE_URL . '/board-of-directors/' . $value->post_name;
+
+    // $url = wp_get_attachment_url(get_post_thumbnail_id($value->ID));
+    // $profile_name = $value->post_title;
+    // $html .='<div class="profilecontainer">
+          // <div class="profilePic"><img src="' . $url . '" alt="' . $profile_name . '"></div>
+          // <div class="name">' . $profile_name . '</div>
+          // <div class="place">' . $designation . '</div>
+        // </div> ';
+  // }
+  // $html .= "</div>";
+  // return $html;
+// }
+
+
 function getBoardOfDirectors() {
   global $post;
-  // $type = 'board-of-directors';
+  $type = 'board-of-directors';
 
-  global $wpdb;  
+  global $wpdb;
+  
   $args_post = array(
       'numberposts' => -1,
       'post_type' => 'board-of-directors',
       'post_status' => 'publish',
+	  'orderby' => 'ID',
+	  'order' => 'ASC'
   );
   $survey_page = get_posts($args_post);
+  ?>
 
-  $html = '<div class="boarddirectorBoxes">';
+  <?php
+  $html = ' <div class="board-directors-block welcome-text">                                  
+                    <div class="col-md-12 board-director-list">';
+  $html.= ' <div class="arrow left-arrow"><a href="#" onclick="return false;" class="next"><img src="'.INC_URL_IMG . DS . 'left_arrow.png" alt=""></a></div>
+  <ul class="list-inline" id="owl-demo2">';
+
   foreach ($survey_page as $value) {
-    //print_r($value);
     $board_of_directors = get_post_meta($value->ID, 'meta_box_info', true);
     $board_of_directors_ar = get_post_meta($value->ID, 'meta_box_info_ar', true);
     $designation = custom_translate($board_of_directors, $board_of_directors_ar);
@@ -78,13 +118,19 @@ function getBoardOfDirectors() {
 
     $url = wp_get_attachment_url(get_post_thumbnail_id($value->ID));
     $profile_name = $value->post_title;
-    $html .='<div class="profilecontainer">
-          <div class="profilePic"><img src="' . $url . '" alt="'.$profile_name.'"></div>
-          <div class="name"><font my="my" style="font-size:100%">' . $profile_name . '</font></div>
-          <div class="place"><font my="my" style="font-size:100%">' . $designation . '</font></div>
-        </div> ';
+      $html.= '<li><img alt="" src="'.$url.'">';
+      $html.= '<h3>'.$profile_name.'</h3>';
+      $html.='<h4>'.$designation.'</h4>';
+      $html.='</li>';                        
   }
-  $html .= "</div>";
+  $html .='</ul>
+                        <div class="arrow right-arrow">
+                          <a href="#" onclick="return false;" class="prev"><img src="'.INC_URL_IMG . DS . 'right_arrow.png" alt=""></a>
+                        </div>
+                </div>
+                </div>  
+';
+
   return $html;
 }
 
@@ -104,18 +150,19 @@ function meta_box_info($post) {
   $values = get_post_custom($post->ID);
   wp_nonce_field('my_meta_box_nonce', 'meta_box_nonce');
   ?>
-    <?php $text = get_post_meta($post->ID, 'meta_box_info', true);
-    $text_ar = get_post_meta($post->ID, 'meta_box_info_ar', true);
-    ?>
-    <p>
-      <label for="news_title_text">English</label>
-      <input type="text" name="meta_box_info" id="meta_box_info" value="<?php echo $text; ?>">
-    </p>
+  <?php
+  $text = get_post_meta($post->ID, 'meta_box_info', true);
+  $text_ar = get_post_meta($post->ID, 'meta_box_info_ar', true);
+  ?>
+  <p>
+    <label for="news_title_text">English</label>
+    <input type="text" name="meta_box_info" id="meta_box_info" value="<?php echo $text; ?>">
+  </p>
 
-    <p>
-      <label for="news_title_text">Arabic</label>
-      <input type="text" name="meta_box_info_ar" id="meta_box_info_ar" value="<?php echo $text_ar; ?>">
-    </p>
+  <p>
+    <label for="news_title_text">Arabic</label>
+    <input type="text" name="meta_box_info_ar" id="meta_box_info_ar" value="<?php echo $text_ar; ?>">
+  </p>
   <?php
 }
 
@@ -140,8 +187,6 @@ function save_meta_box_info($post_id) {
 
   if (isset($_POST['meta_box_info']))
     update_post_meta($post_id, 'meta_box_info', wp_kses($_POST['meta_box_info'], $allowed));
-
-
   if (isset($_POST['meta_box_info_ar']))
     update_post_meta($post_id, 'meta_box_info_ar', wp_kses($_POST['meta_box_info_ar'], $allowed));
 

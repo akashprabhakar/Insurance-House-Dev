@@ -15,7 +15,7 @@
 add_action('admin_init', 'publications_css');
 
 function publications_css() {
-  wp_enqueue_style('publications-css', get_bloginfo('template_directory') . '/includes/css/tf-functions.css');
+  wp_enqueue_style('publications-css', get_bloginfo('template_directory') . '/css/tf-functions.css');
 }
 
 // 1. Custom Post Type Registration (Events)
@@ -53,7 +53,7 @@ function create_publications_postype() {
       'supports' => array('title', 'thumbnail', 'excerpt', 'editor'),
       'show_in_nav_menus' => true,
       'taxonomies' => array('publication_category', 'post_tag')
-      //'show_in_menu' => 'annet-fhg-capm-all/index.php'
+          //'show_in_menu' => 'annet-fhg-capm-all/index.php'
   );
 
   register_post_type('fhg_publications', $args);
@@ -199,16 +199,16 @@ function publications_styles() {
   global $post_type;
   if ('fhg_publications' != $post_type)
     return;
-  wp_enqueue_style('ui-datepicker', get_bloginfo('template_url') . '/includes/css/jquery-ui-1.8.9.custom.css');
+  wp_enqueue_style('ui-datepicker', get_bloginfo('template_url') . '/css/jquery-ui-1.8.9.custom.css');
 }
 
 function publications_scripts() {
   global $post_type;
   if ('fhg_publications' != $post_type)
     return;
-  wp_enqueue_script('jquery-ui', get_bloginfo('template_url') . '/includes/js/jquery-ui-1.8.9.custom.min.js', array('jquery'));
-  wp_enqueue_script('ui-datepicker', get_bloginfo('template_url') . '/includes/js/jquery.ui.datepicker.min.js');
-  wp_enqueue_script('custom_script', get_bloginfo('template_url') . '/includes/js/pubforce-admin.js', array('jquery'));
+  wp_enqueue_script('jquery-ui', get_bloginfo('template_url') . '/js/jquery-ui.js', array('jquery'));
+  wp_enqueue_script('ui-datepicker', get_bloginfo('template_url') . '/js/jquery.ui.datepicker.min.js');
+  wp_enqueue_script('custom_script', get_bloginfo('template_url') . '/js/pubforce-admin.js', array('jquery'));
 }
 
 add_action('admin_print_styles-post.php', 'publications_styles', 1000);
@@ -240,7 +240,7 @@ function publications_meta_callback($post) {
   <div class="prfx-row-content">
     <label for="featured-checkbox-publication">
       <input type="checkbox" name="featured-checkbox-publication" id="featured-checkbox-publication" value="yes" <?php if (isset($prfx_stored_meta['featured-checkbox-publication'])) checked($prfx_stored_meta['featured-checkbox-publication'][0], 'yes'); ?> />
-  <?php _e('Featured Publications', 'prfx-textdomain') ?>
+      <?php _e('Featured Publications', 'prfx-textdomain') ?>
     </label>
 
   </div>
@@ -417,12 +417,12 @@ function getAllPublications($no) {
 
   $args_post = array(
       'numberposts' => $no,
-      'orderby'   => 'meta_value',
-      'meta_key'  => 'fhg_publications_startdate',
-      'order'     => 'DESC',
+      'orderby' => 'meta_value',
+      'meta_key' => 'fhg_publications_startdate',
+      'order' => 'DESC',
       'post_type' => 'fhg_publications',
       'post_status' => 'publish',
-      'posts_per_page' => 10, 
+      'posts_per_page' => 10,
       'paged' => get_query_var('paged') ? get_query_var('paged') : 1
   );
   $arg_post_data = get_posts($args_post);
@@ -430,98 +430,15 @@ function getAllPublications($no) {
   return $arg_post_data;
 }
 
-function displayPublications() {
-
-
-  $args_post = array(
-      'numberposts' => 4,
-      'child_of' => 0,
-      'orderby'   => 'meta_value',
-      'meta_key'  => 'fhg_publications_startdate',
-      'order'     => 'DESC',
-      'post_type' => 'fhg_publications',
-      'post_status' => 'publish',
-  );
-  $arg_post_data = get_posts($args_post);
-
-
-
-
-
-  if ($arg_post_data) {
-    foreach ($arg_post_data as $post_data) {
-      setup_postdata($post_data);
-      $each_faq = (array) $post_data;
-      $id = $each_faq['ID'];
-      $post_title = $each_faq['post_title'];
-      $post_content = $each_faq['post_content'];
-      $customurl = $each_faq['guid'];
-      $custom = get_post_custom($id);
-
-      $featured = $custom['featured-checkbox-publication'][0];
-
-      if ($featured == 'yes') {
-        $featuredpost = '<span style="color:#f00;">This is a featured news!</span> ';
-      } else {
-        $featuredpost = 'This is a not a featured news!';
-      }
-      $sd = $custom["fhg_publications_startdate"][0];
-      $ed = $custom["fhg_publications_enddate"][0];
-
-      // - grab gmt for start -
-      // $gmts = date('g:ia \o\n l jS F Y', $sd);
-      $length = str_word_count($post_content);
-
-
-
-      //$total_words = explode(" ", $post_content);
-      //$post_content = implode(" ", array_splice($total_words, 0, 12));
-      $post_content1 = wp_trim_words($post_content, 13, '...');
-
-      //$details .= '...<a href="'.$customurl.'">Read More</a>';
-
-      $gmts = date('jS F Y', $sd);
-
-
-      if (wp_get_attachment_url(get_post_thumbnail_id($id))) {
-        $feat_image = wp_get_attachment_url(get_post_thumbnail_id($id));
-        $feat_image_url = '<img src="' . $feat_image . '" width="230" height="150" alt=""/>';
-      } else {
-        $feat_image = INC_URL_IMG . DS . 'transparent.png';
-        $feat_image_url = '<img src="' . $feat_image . '" width="1" height="150" alt=""/>';
-      }
-      $arrowurl = INC_URL_IMG . DS . 'aarrow-brown.png';
-
-
-      $url = $_SERVER['REQUEST_URI'];
-      if (strstr($url, '/ar/') !== false) { //check if '?' is present
-
-        $read = '<div class="link"><a href="' . $customurl . '"><img src="' . $arrowurl . '" width="12" height="12" alt=""/>اقرأ المزيد</a></div></div>';
-      } else {
-        $read = '<div class="link"><a href="' . $customurl . '"><img src="' . $arrowurl . '" width="12" height="12" alt=""/>Read More</a></div></div>';
-      }
-
-      $details .= '<div class="newscontainer1"><li style="list-style:none;"><div class="img">' . $feat_image_url . '</div>';
-      $details .= '<div class="detials">  <div class="heading">' . $post_title . '</div>';
-      $details .= '<div class="date">' . $gmts . '</div>';
-      $details .= '<p>' . $post_content1 . '</p>' . $read . '</li></div>';
-    }
-    echo $str .= $details;
-  } else {
-    echo "No data";
-  }
-}
-
-add_shortcode('latest-publications', 'displayPublications');
 
 function displayFeaturedPublications() {
 
   $args_post = array(
       'numberposts' => -1,
       'child_of' => 0,
-      'orderby'   => 'meta_value',
-      'meta_key'  => 'fhg_publications_startdate',
-      'order'     => 'DESC',
+      'orderby' => 'meta_value',
+      'meta_key' => 'fhg_publications_startdate',
+      'order' => 'DESC',
       'post_type' => 'fhg_publications',
       'post_status' => 'publish',
   );
@@ -534,65 +451,39 @@ function displayFeaturedPublications() {
       $id = $each_faq['ID'];
       $custom = get_post_custom($id);
       $featured = $custom['featured-checkbox-publication'][0];
-
+//print_r($custom);
       if ($featured == 'yes') {
-        $featuredpost = '<span style="color:#f00;">This is a featured news!</span> ';
-        // print_r($each_faq);
-        $post_title = $each_faq['post_title'];
-        $post_content = $each_faq['post_content'];
-        $customurl = $each_faq['guid'];
-        //$post_name = $each_faq['post_title'];
-        $sd = $custom["fhg_publications_startdate"][0];
-        $ed = $custom["fhg_publications_enddate"][0];
-        $feat_image = wp_get_attachment_url(get_post_thumbnail_id($id));
-        // - grab gmt for start -
-        // $gmts = date('g:ia \o\n l jS F Y', $sd);
-        $post_content =  substr($post_content, 0, 200);
-        $post_content = substr($post_content, 0, strrpos($post_content, ' ') + 1);
+        $postvalues = get_values_from_array($each_faq,200,200,7,'fhg_publications_startdate');
+        
 
-        $titlelength = str_word_count($post_title);
-        if ($titlelength >= 10) {
-           $post_title = wp_trim_words($post_title, 7, '...');
-         // $post_content .= '...Read More
+        if ($counter == 0) {
+          $details .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-16 newspageContent">';
+          $details .= '<a href="' . $postvalues['customurl'] . '"><div class="pressreleaseLeftcon">';
+          $details .= '<div class="pad_div">';
+          $details .= '<div class="hed">' . $postvalues['title'] . '</div>';
+          $details .= '<div class="topborder">&nbsp;</div>';
+          $details .= '<div class="date"><span>' . custom_translate($postvalues['date'], $postvalues['date_ar']) . '</span></div>';
+          $details .= '<p>' . $postvalues['content'] . '</p></div></div><img src=' . $postvalues['feat_image'] . ' alt="featured_publication_img"></a></div>';
+          $counter = 1;
+        } else if ($counter == 1) {
+          $details .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-16 newspageContent newscontenttop">';
+          $details .= '<a href="' . $postvalues['customurl'] . '"><div class="pressreleaseRightconTop">';
+          $details .= '<div class="boxLeft"><div class="topborder">&nbsp;</div>';
+          $details .= '<div class="date1">' . custom_translate($postvalues['date'], $postvalues['date_ar']) . '</div>';
+          $details .= '<p>' . $postvalues['title'] . '</p></div>';
+          $details .= '<div class="boxRight"><div class="arrowonimgr"><div class="arrow-right"></div></div><img src=' . $postvalues['feat_image'] . ' alt="featured_publication_img"
+          ></div>';
+          $details .= '</div></a></div>';
+          $counter = 2;
+        } else if ($counter == 2) {
+          $details .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-16 newspageContent newscontentbottom"><div class="pressreleaseRightconBottom">';
+          $details .= '<a href="' . $postvalues['customurl'] . '"><div class="boxRight"><div class="arrowonimgl"><div class="arrow-right"></div></div><img src="' . $postvalues['feat_image'] . '" alt="featured_publication_img"></div>';
+          $details .= '<div class="boxLeft">';
+          $details .= '<div class="topborder">&nbsp;</div>';
+          $details .= '<div class="date">' . custom_translate($postvalues['date'], $postvalues['date_ar']) . '</div>';
+          $details .= '<p>' . $postvalues['title'] . '</p></div></a></div></div>';
+          $counter = 3;
         }
-        $gmts = date('jS F Y', $sd);    // eng date
-        $gmts_ar = trans(transfullmonth(date('d F Y', $sd))); //arabic date
-
-        if($counter == 0){
-                    $details .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-16 newspageContent">';
-                    $details .= '<a href="'.$customurl.'"><div class="pressreleaseLeftcon">';
-                    $details .= '<div class="pad_div">';
-                    $details .= '<div class="hed">'.$post_title.'</div>';
-                    $details .= '<div class="topborder">&nbsp;</div>';
-                    $details .= '<div class="date"><span>'. custom_translate($gmts,$gmts_ar).'</span></div>';
-                    $details .= '<p>'.$post_content.'</p></div></div><img src='.$feat_image.'></a></div>';
-                            
-                          
-                   $counter = 1;       
-                     
-                }else if($counter == 1){
-                     $details .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-16 newspageContent newscontenttop">';
-                    $details .= '<a href="'.$customurl.'"><div class="pressreleaseRightconTop">';
-                    $details .= '<div class="boxLeft"><div class="topborder">&nbsp;</div>';
-                    $details .= '<div class="date1">'. custom_translate($gmts,$gmts_ar).'</div>';
-                    $details .= '<p>'.$post_title.'</p></div>';
-                    $details .= '<div class="boxRight"><div class="arrowonimgr"><div class="arrow-right"></div></div><img src='.$feat_image.'></div>';
-                    $details .= '</div></a></div>';
-
-                    // if($featuredcount != 3){
-                    //     $details .= '</div>';
-                    // }
-                    $counter = 2;
-                }else if($counter == 2){
-                    $details .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-16 newspageContent newscontentbottom"><div class="pressreleaseRightconBottom">';
-                    $details .= '<a href="'.$customurl.'"><div class="boxRight"><div class="arrowonimgl"><div class="arrow-right"></div></div><img src="'.$feat_image.'"></div>';
-                    $details .= '<div class="boxLeft">';
-                    $details .= '<div class="topborder">&nbsp;</div>';
-                    $details .= '<div class="date">'. custom_translate($gmts,$gmts_ar).'</div>';
-                    $details .= '<p>'.$post_title.'</p></div></a></div></div>';
-
-                    $counter = 3;
-                }
       }
     }
     echo $str .= $details;
@@ -608,7 +499,7 @@ function displayPublicationsAll() {
   if (isset($_GET['month']) || isset($_GET['yr'])) {
 
     global $wpdb;
-    $db = $wpdb->prefix.'postmeta';
+    $db = $wpdb->prefix . 'postmeta';
     if (isset($_GET['month']) && !empty($_GET['month'])) {
       $monthval = $_GET['month'];
 
@@ -627,17 +518,17 @@ function displayPublicationsAll() {
 
       $args = array(
           'numberposts' => -1,
-          'orderby'   => 'meta_value',
-          'meta_key'  => 'fhg_publications_startdate',
-          'order'     => 'DESC',
+          'orderby' => 'meta_value',
+          'meta_key' => 'fhg_publications_startdate',
+          'order' => 'DESC',
           'post_type' => 'fhg_publications',
           'post__in' => $postidarr,
           'post_status' => 'publish',
-          'posts_per_page' => 10, 
+          'posts_per_page' => 10,
           'paged' => get_query_var('paged') ? get_query_var('paged') : 1
       );
       $arg_post_data = get_posts($args);
-      $totalposts = totalPPosts_mon_yrs($postidarr);            
+      $totalposts = totalPPosts_mon_yrs($postidarr);
     }
 
     if (isset($_GET['yr']) && !empty($_GET['yr'])) {
@@ -656,19 +547,18 @@ function displayPublicationsAll() {
           'post_type' => 'fhg_publications',
           'post__in' => $postidarr,
           'post_status' => 'publish',
-          'orderby'   => 'meta_value',
-          'meta_key'  => 'fhg_publications_startdate',
-          'order'     => 'DESC',
-          'posts_per_page' => 10, 
+          'orderby' => 'meta_value',
+          'meta_key' => 'fhg_publications_startdate',
+          'order' => 'DESC',
+          'posts_per_page' => 10,
           'paged' => get_query_var('paged') ? get_query_var('paged') : 1
       );
       $arg_post_data = get_posts($args);
-      $totalposts = totalPPosts_mon_yrs($postidarr);  
-
+      $totalposts = totalPPosts_mon_yrs($postidarr);
     }
   } else {
     $arg_post_data = getAllPublications(-1);
-    $totalposts =  totalPostsPublications();          
+    $totalposts = totalPostsPublications();
   }
 
   if ($arg_post_data) {
@@ -679,62 +569,38 @@ function displayPublicationsAll() {
     $counter = 0;
     foreach ($arg_post_data as $post_data) {
       $each_faq = (array) $post_data;
-
-      $id = $each_faq['ID'];
-
-      $post_title = $each_faq['post_title'];
-      $post_content = $each_faq['post_content'];
-      $custom = get_post_custom($id);
-      // print_r($custom);
-      $sd = $custom["fhg_publications_startdate"][0];
-      $ed = $custom["fhg_publications_enddate"][0];
-      $posturl = $each_faq['guid'];
-      $post_name = $each_faq['post_title'];
-      $customurl = $each_faq['guid'];
-
-      //$location = custom_translate($custom['my_meta_box_text_publications'][0],$custom['my_meta_box_text_publications_ar'][0]);
-      $post_name .= '...<a href="' . $customurl . '">'.custom_translate('Read More','اقرأ المزيد').'</a>';
-      $feat_image = wp_get_attachment_url(get_post_thumbnail_id($id));
-      $gmts = date('jS F Y', $sd);    // eng date
-      $gmts_ar = trans(transfullmonth(date('d F Y', $sd))); //arabic date
-
-      // - grab gmt for end -
-      //$gmte = date('j M\/Y', $ed);
-      //$gmte = strtotime($gmte);
-
+      $postvalues = get_values_from_array($each_faq,'','',20,'fhg_publicationss_startdate');
+      $postvalues_title = $postvalues['title'];
+      $postvalues['title'] .= '...</a><a class="newslistinglink" href="' . $postvalues['customurl'] . '">' . custom_translate('Read More', 'اقرأ المزيد') . '</a>';
       if ($counter == 0) {
 
         $details .= '<li><div class="detailpast"><div class="left">';
-        $details .= '<img src='.$feat_image.'></div>';
+        $details .= '<img src=' . $postvalues['feat_image'] . ' alt="'.$postvalues_title.'"></div>';
         $details .= '<div class="right"><div class="topborder">&nbsp;</div>';
-        //$details .= '<div class="venueDate"><span>' . $venue . ':</span>  <span>' . $location . '</span> <span>' . $date . ':</span> <span>' . $gmts . '</span></div>';
-        $details .= '<div class="venueDate"><span>'.custom_translate('Date','تاريخ').':</span> <span>'. custom_translate($gmts,$gmts_ar).'</span></div>';
-        $details .= '<div class="pastEvtxt"><a href="'.$customurl.'">'.$post_name.'</a></div></div></li>';
+        $details .= '<div class="venueDate"><span>' . custom_translate('Date', 'تاريخ') . ':</span> <span>' . custom_translate($postvalues['date'], $postvalues['date_ar']) . '</span></div>';
+        $details .= '<div class="pastEvtxt"><a href="' . $postvalues['customurl'] . '">' . $postvalues['title'] . '</div></div></div></li>';
 
         $counter = 1;
       } else if ($counter == 1) {
 
-
         $details .= '<li><div class="detailpast"><div class="left">';
-        $details .= '<img src='.$feat_image.'></div>';
+        $details .= '<img src=' . $postvalues['feat_image'] . ' alt="'.$postvalues_title.'"></div>';
         $details .= '<div class="right"><div class="topborder">&nbsp;</div>';
-        //$details .= '<div class="venueDate"><span>' . $venue . ':</span>  <span>' . $location . '</span> <span>' . $date . ':</span> <span>' . $gmts . '</span></div>';
-        $details .= '<div class="venueDate"><span>'.custom_translate('Date','تاريخ').':</span> <span>'. custom_translate($gmts,$gmts_ar).'</span></div>';
-        $details .= '<div class="pastEvtxt"><a href="'.$customurl.'">'.$post_name.'</a></div></div></li>';
+        $details .= '<div class="venueDate"><span>' . custom_translate('Date', 'تاريخ') . ':</span> <span>' . custom_translate($postvalues['date'], $postvalues['date_ar']) . '</span></div>';
+        $details .= '<div class="pastEvtxt"><a href="' . $postvalues['customurl'] . '">' . $postvalues['title'] . '</div></div></div></li>';
 
         $counter = 0;
       }
 
-
-      //$details .= $gmte;
     }
-    $details .= '</ul></div>';
+    $details .= '</ul>';
 
-            $details .= '</div><div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div></div>';
-            
-            $details .= publicationspagination(totalPostsPublications());
-        echo $str .= $details;
-        //echo $str = $cat_name;
+    $details .= '</div></div><div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div></div>';
+
+
+    $details .= publicationspagination(totalPostsPublications());
+    echo $str .= $details;
+    //echo $str = $cat_name;
     //echo $str = $cat_name;
   } else {
 
@@ -760,55 +626,52 @@ function totalPostsPublications() {
   return count($arg_post_data1);
 }
 
-function totalPPosts_mon_yrs($postidarr){
+function totalPPosts_mon_yrs($postidarr) {
 
-    global $wpdb;
-    $args = array(
-        'numberposts' => -1,
-        'post_type' => 'fhg_publications',
-        'post__in' => $postidarr
-    );
-    $arg_post_data_mon_yr = get_posts($args);
+  global $wpdb;
+  $args = array(
+      'numberposts' => -1,
+      'post_type' => 'fhg_publications',
+      'post__in' => $postidarr
+  );
+  $arg_post_data_mon_yr = get_posts($args);
 
-    return count($arg_post_data_mon_yr);
-
+  return count($arg_post_data_mon_yr);
 }
 
-function publicationspagination($totalposts){
+function publicationspagination($totalposts) {
 
   $big = 999999999; // need an unlikely integer
-  $details1 .= '<div class="container"><div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div><div class="col-lg-12 col-md-12 col-sm-12 col-xs-16 divpagination">';            
-  $totalcount  = $totalposts / 10;
-  $pages = paginate_links( array(
-
-      'base' => custom_translate(str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),SITE_URL.'/ar/البيانات-الصحفية%_%'),
+  
+  $totalcount = $totalposts / 10;
+  $pages = paginate_links(array(
+      'base' => custom_translate(str_replace($big, '%#%', esc_url(get_pagenum_link($big))), SITE_URL . '/ar/البيانات-الصحفية%_%'),
       'format' => '?paged=%#%',
-      'current' => max( 1, get_query_var('paged') ),
+      'current' => max(1, get_query_var('paged')),
       'total' => $totalcount,
       'prev_next' => false,
-      'type'  => 'array',
-      'prev_next'   => TRUE,
-      'prev_text'    => __('previous'),
-      'next_text'    => __('next'),
-  ) );
+      'type' => 'array',
+      'prev_next' => TRUE,
+      'prev_text' => __(custom_translate('previous', 'سابق')),
+      'next_text' => __(custom_translate('next', 'التالي')),
+          ));
 
-  if( is_array( $pages ) ) {
-   //   $paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
-      $details1.= '<ul class="pagination text-center">';
-          foreach ( $pages as $page ){
-              $details1 .= "<li>$page</li>";
-          }                                
-     $details1 .= '</ul>';
+  if (is_array($pages)) {
+   $details1 .= '<div class="container"><div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div><div class="col-lg-12 col-md-12 col-sm-12 col-xs-16 divpagination">';
+    $details1.= '<ul class="pagination text-center">';
+    foreach ($pages as $page) {
+      $details1 .= "<li>$page</li>";
+    }
+    $details1 .= '</ul></div><div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div></div>';
   }
-  $details1 .= '</div><div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div></div>';
-
+  
   return $details1;
 }
 
-function fhg_publications_deactivate(){
-    remove_shortcode('all-publications');
-    remove_shortcode('featured-publications');
+function fhg_publications_deactivate() {
+  remove_shortcode('all-publications');
+  remove_shortcode('featured-publications');
 }
 
-register_deactivation_hook( __FILE__, 'fhg_publications_deactivate' );
+register_deactivation_hook(__FILE__, 'fhg_publications_deactivate');
 ?>

@@ -210,7 +210,10 @@ function getGalleryDetails(id){
             var data = eval('(' + data + ')');
                 jQuery('#content').hide().html(decodeURIComponent(data.response)).fadeIn("fast");
                 jQuery('#titlul_b').show();
-                jQuery('#titlul').show().html("<span style='float:left; margin-right:3px;'>Gallery title: <\/span> <span title='Double-click to rename...' class='dblclick' id='gall_id_"+ id +"'>" + decodeURIComponent(data.titlul) + "<\/span>");
+                jQuery('#titlul').show().html("<span style='float:left; margin-right:3px;'>English title: <\/span> <span title='Double-click to rename...' class='dblclick' id='gall_id_"+ id +"'>" + decodeURIComponent(data.titlul) + "<\/span>");
+                 jQuery('#engdescback').show().html("<span style='float:left; margin-right:3px;'>English Description: <\/span> <span title='Double-click to rename...' class='dblclick1' id='gall_id_desc"+ id +"'>" + decodeURIComponent(data.englishdesc) + "<\/span>");
+                jQuery('#titlularab').show().html("<span style='float:left; margin-right:3px;'>Arabic title: <\/span> <span title='Double-click to rename...' class='dblclick2' id='gall_id_ar"+ id +"'>" + decodeURIComponent(data.titlularab) + "<\/span>");
+                jQuery('#arabdescback').show().html("<span style='float:left; margin-right:3px;'>Arabic Description: <\/span> <span title='Double-click to rename...' class='dblclick3' id='gall_id_desc_ar"+ id +"'>" + decodeURIComponent(data.arabicdesc) + "<\/span>");
             
             if(data.folderexist!=''){
                 jQuery('#error').html(decodeURIComponent(data.folderexist));
@@ -401,6 +404,36 @@ function getGalleryDetails(id){
     width      : "670px",
     height     : "20px",
     submitdata : function ( value, settings ) { return { "action": 'oQeyEditGalleryTitle' }; }
+   });
+
+    jQuery(".dblclick2").editable( ajaxurl, { 
+    indicator  : 'Updating...',
+    tooltip    : "Double-click to rename...",
+    event      : "dblclick",
+    style      : "inherit",
+    width      : "670px",
+    height     : "20px",
+    submitdata : function ( value, settings ) { return { "action": 'oQeyEditGalleryArabTitle' }; }
+   });
+
+    jQuery(".dblclick1").editable( ajaxurl, { 
+    indicator  : 'Updating...',
+    tooltip    : "Double-click to rename...",
+    event      : "dblclick",
+    style      : "inherit",
+    width      : "670px",
+    height     : "20px",
+    submitdata : function ( value, settings ) { return { "action": 'oQeyEditGalleryEngDesc' }; }
+   });
+
+    jQuery(".dblclick3").editable( ajaxurl, { 
+    indicator  : 'Updating...',
+    tooltip    : "Double-click to rename...",
+    event      : "dblclick",
+    style      : "inherit",
+    width      : "670px",
+    height     : "20px",
+    submitdata : function ( value, settings ) { return { "action": 'oQeyEditGalleryArabDesc' }; }
    });
 
 jQuery(".styled").click(function(){     

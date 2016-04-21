@@ -47,48 +47,43 @@ register_activation_hook(__FILE__, 'jal_install');
 /* =============================================================================== */
 /* Deactivation table */
 /* =============================================================================== */
+
 add_action('init', 'social_feeds_css');
 
 function social_feeds_css() {
-  wp_enqueue_style('social_feeds_css', get_bloginfo('template_directory') . '/includes/css/font-awesome/css/font-awesome.css');
   wp_enqueue_script('social_feeds_js', plugin_dir_url(__FILE__) . '/js/social_feedss.js');
-  
 }
-
-
-
-
 
 function social_media_feeds() {
   //$result = slect_data();
   $socialobj = new SocialFeeds;
   $result = $socialobj->getData();
   if (!empty($result)) {
-        $facebook_id = $result->facebook_usr_id;
-        $fb_access_tkn = $result->facebook_access_tkn;
-        /* Instagram */
-        $insta_usr_id = $result->instagram_usr_id;
-        $insta_tkn = $result->instagram_access_tkn;
-        $twiter = $result->twiter_code;
-        $twiter_widget = $result->twiter_widget_id;
-        $youtube = $result->youtube_url;
-      } else {
+    $facebook_id = $result->facebook_usr_id;
+    $fb_access_tkn = $result->facebook_access_tkn;
+    /* Instagram */
+    $insta_usr_id = $result->instagram_usr_id;
+    $insta_tkn = $result->instagram_access_tkn;
+    $twiter = $result->twiter_code;
+    $twiter_widget = $result->twiter_widget_id;
+    $youtube = $result->youtube_url;
+  } else {
 
-        $id = "";
-        $facebook_id = "";
-        $fb_access_tkn = "";
-        $insta_usr_id = "";
-        $insta_tkn = "";
-        $twiter = "";
-        $twiter_widget = "";
-        $youtube = "";
-      }
+    $id = "";
+    $facebook_id = "";
+    $fb_access_tkn = "";
+    $insta_usr_id = "";
+    $insta_tkn = "";
+    $twiter = "";
+    $twiter_widget = "";
+    $youtube = "";
+  }
 
   /* limked in */
   /* ================================================== */
   //$linkedin = stripslashes($result->linked_in_code);
   /* =================================================== */
-  
+
 
   $socialobj->socialicons($result);
 //  $socialobj->social_facebook($facebook_id, $fb_access_tkn);
@@ -210,12 +205,14 @@ function social_feeds_list() {
   echo '</div></div></div>';
 }
 
-
-
-
 function socialfeeds() {
   add_menu_page(__('Social-feeds'), 'Social-feeds', 8, 'social-feeds/social-feeds.php', 'social_feeds_list');
 }
 
 add_action('admin_menu', 'socialfeeds');
+
+function load_path_script() {
+        wp_enqueue_script( 'my_custom_script', get_template_directory_uri() . '/js/path.js' );
+}
+add_action( 'admin_enqueue_scripts', 'load_path_script' );
 ?>

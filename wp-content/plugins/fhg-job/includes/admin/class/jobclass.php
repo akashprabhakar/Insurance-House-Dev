@@ -6,6 +6,37 @@ class jobClass {
   function addNewJob($table_name, $meminfo) {
     global $wpdb;
     $count = sizeof($meminfo);
+     if (isset($_FILES["image_url"]["type"])) {
+          echo 'sdfsdf';
+      $validextensions = array("jpeg", "jpg","png");
+      $temporary = explode(".", $_FILES["image_url"]["name"]);
+      $file_extension = end($temporary);
+
+      if ((($_FILES["image_url"]["type"] == "image/jpeg") || ($_FILES["image_url"]["type"] == "image/jpg") || ($_FILES["image_url"]["type"] == "image/png")) && ($_FILES["image_url"]["size"] < 10000000) && in_array($file_extension, $validextensions)) {
+
+        if ($_FILES["image_url"]["error"] > 0) {
+          echo "Return Code: " . $_FILES["image_url"]["error"] . "<br/><br/>";die;
+        } else {
+          // if (file_exists( DOCUMENT_UPLOADS.DS . $_FILES["resume_filename"]["name"])) {
+          //  echo $_FILES["resume_filename"]["name"] . " <span id='invalid'><b>already exists.</b></span> ";
+          // }
+
+          $sourcePath = $_FILES['image_url']['tmp_name'];
+          $targetPath = DOCUMENT_UPLOADS . DS . $_FILES["image_url"]["name"];
+          // echo $targetPath;
+          // echo $sourcePath;// Target path where file is to be stored
+          if (move_uploaded_file($sourcePath, $targetPath)) { // Moving Uploaded file
+            $image_url = $_FILES["image_url"]["name"];
+
+          } else {
+            echo "<h1>File could not be uploaded .Check File Permissions</h1>";
+          }
+        }
+      } else {
+
+        echo "<span id='invalid'>***Please upload pdf and doc files only.***<span>";
+      }
+    }
     if ($count > 0) {
       $job_id = 0;
       $job_title = $meminfo['job_title'];
@@ -25,13 +56,13 @@ class jobClass {
                             (
                                 `job_title`,`job_title_ar`,`job_phone_no`,
                                 `job_location`,`job_location_ar`,`job_description`,
-                                `job_description_ar`, `job_display_to_date`, `job_hr_email`
+                                `job_description_ar`, `job_display_to_date`, `job_hr_email`,`imageurl`
                             )
                             VALUES
                             (
                                 '$job_title','$job_title_ar','$job_phone_no',
                                 '$job_location','$job_location_ar','$job_description',
-                                '$job_description_ar','$job_display_to_date', '$job_hr_email'
+                                '$job_description_ar','$job_display_to_date', '$job_hr_email','$image_url'
                             ) ";
 
       $wpdb->query($sql);
@@ -48,6 +79,37 @@ class jobClass {
 
     $recid = $_POST['record_id'];
     $count = sizeof($meminfo);
+    if (isset($_FILES["image_url"]["type"])) {
+ 
+      $validextensions = array("jpeg", "jpg","png");
+      $temporary = explode(".", $_FILES["image_url"]["name"]);
+      $file_extension = end($temporary);
+
+      if ((($_FILES["image_url"]["type"] == "image/jpeg") || ($_FILES["image_url"]["type"] == "image/jpg") || ($_FILES["image_url"]["type"] == "image/png")) && ($_FILES["image_url"]["size"] < 10000000) && in_array($file_extension, $validextensions)) {
+
+        if ($_FILES["image_url"]["error"] > 0) {
+          echo "Return Code: " . $_FILES["image_url"]["error"] . "<br/><br/>";die;
+        } else {
+          // if (file_exists( DOCUMENT_UPLOADS.DS . $_FILES["resume_filename"]["name"])) {
+          //  echo $_FILES["resume_filename"]["name"] . " <span id='invalid'><b>already exists.</b></span> ";
+          // }
+
+          $sourcePath = $_FILES['image_url']['tmp_name'];
+          $targetPath = DOCUMENT_UPLOADS . DS . $_FILES["image_url"]["name"];
+          // echo $targetPath;
+          // echo $sourcePath;// Target path where file is to be stored
+          if (move_uploaded_file($sourcePath, $targetPath)) { // Moving Uploaded file
+            $image_url = $_FILES["image_url"]["name"];
+
+          } else {
+            echo "<h1>File could not be uploaded .Check File Permissions</h1>";
+          }
+        }
+      } else {
+
+        echo "<span id='invalid'>***Please upload pdf and doc files only.***<span>";
+      }
+    }
 
     if ($count > 0) {
       $meminfo['file'] = $file_name;
@@ -69,11 +131,12 @@ class jobClass {
                         SET
                             `job_title`='$job_title',`job_title_ar`='$job_title_ar',`job_phone_no`='$job_phone_no',
                             `job_location`='$job_location',`job_location_ar`='$job_location_ar', `job_description`='$job_description',
-                            `job_description_ar`='$job_description_ar', `job_display_to_date`='$job_display_to_date', `job_hr_email` = '$job_hr_email'
+                            `job_description_ar`='$job_description_ar', `job_display_to_date`='$job_display_to_date', `job_hr_email` = '$job_hr_email',`imageurl`='$image_url'
                         WHERE
                             `job_id`='$recid'";
-
+                           
       $wpdb->query($sql);
+
       return true;
     } else {
       return false;
@@ -146,7 +209,7 @@ class jobClass {
   function get_career_description() {
     global $wpdb;
     $date = date('Y' . '-' . 'm' . '-' . 'd');
-    $sql = "select * from " . JS_TABLENAME . " WHERE job_display_to_date >= " . $date . " OR job_display_to_date = 0000-00-00";
+    $sql = "select * from " . JS_TABLENAME . " WHERE job_display_to_date >= " . $date . " OR job_display_to_date = 0000-00-00 ORDER BY job_id DESC;";
     $arrresult = $wpdb->get_results($sql);
     return $arrresult;
   }

@@ -1,0 +1,103 @@
+.navbar-collapse.collapseMini.collapse {
+	display:block;
+	margin:0;
+	padding:0;
+	width:900px;
+	float:right;
+	margin-top:-36px
+}
+.navbar-collapse.collapseMini.collapse ul {
+	width:auto;
+	float:right;
+	margin:0;
+	padding:0
+}
+.navbar-collapse.collapseMini.collapse ul li {
+	float:left;
+	position:relative
+}
+.navbar-collapse.collapseMini.collapse ul.navbar-nav > li > a {
+	margin:0px 12px
+}
+.navbar-toggle.pull-right {
+	display:none
+}
+.navbar-collapse.collapseMini.collapse .menu-main-menu-container ul ul {
+	margin-top:20px
+}
+.navbar-collapse.collapseMini.collapse .menu-main-menu-container ul ul.sub-menu {
+	margin-left:-400px;
+	padding:20px;
+	width:800px
+}
+.navbar-collapse.collapseMini.collapse .menu-main-menu-container ul li + li + li ul.sub-menu {
+	margin-left:-250px;
+	width:500px
+}
+.navbar-collapse.collapseMini.collapse .menu-main-menu-container ul li + li + li + li ul.sub-menu {
+	margin-left:-100px;
+	width:200px
+}
+.contactright .contactaddress {
+	background:url(../images/contactaddress.png) no-repeat 0 50% !important
+}
+.contactright .contactphone {
+	background:url(../images/contactphone.png) no-repeat 0 50% !important
+}
+.contactright .contactfax {
+	background:url(../images/contactfax.png) no-repeat 0 50% !important
+}
+.inner_banner_background {
+	height:400px !important;
+	background-repeat:no-repeat !important
+}
+.contactmobileslider {
+	display:none
+}
+
+/*----------------------------CSS ADDED BY MANISH-------------------------------------*/
+.slide-out-div1 .handle1 {
+	
+    opacity: 0.1;
+    filter: alpha(opacity=10); /* For IE8 and earlier */
+}
+
+.IE8 .overviewBoxes .row .twoBox {
+    border-width: 15px;
+    padding: 5px;
+    width: 39.5%;
+    display: table-cell;
+    float: none;
+}
+.IE8 .overviewBoxes .row .tblBox{    background-color: #f9f9fa;
+    border: 20px solid #ffffff;
+    /* display: table-cell; */
+    float: left;
+    height: auto;
+    padding: 0 0 60px;
+    position: relative;
+    vertical-align: top;
+}
+.IE8 .overviewBoxes .fourBoxSmallSpace .fourBox{    border: 5px solid #ffffff;display: table-cell;}
+.IE8 .overviewBoxes .fourBoxSmallSpace .fourBox .thumbnail{ display: table-cell; }
+.IE8 .overviewBoxes .thumbnail {
+    background: #f9f9fa none repeat scroll 0 0;
+    border: 0 none;
+    float: left;
+    padding: 0;
+    width: 100%;display: table-cell;
+}
+.IE8 #emirates-previous .thumbnail { display: table-cell;}
+.IE8 #recent-works .corporate_commercial_finance .overviewBoxes .col-md-3{ width: 25%; display:table-cell; }
+ .innerinvcontact .contactRightContainer ul li.mapicon {
+    background: rgba(0, 0, 0, 0) url("../images/iconMap.png") no-repeat scroll 0 0;
+	background-image:url(../images/iconMap.png);
+	background-repeat: no-repeat;
+	background-position: top;
+}
+
+.IE8 #press-releases .emiSlider_container .newspageContent .pressreleaseLeftcon {
+background-color:#00426a;
+filter:alpha(opacity=80);
+
+}

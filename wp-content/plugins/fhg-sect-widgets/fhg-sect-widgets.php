@@ -33,7 +33,7 @@ function register_custom_post_type_ant_fhg_widgets() {
       'menu_name' => __('FHG Widget Blocks', 'ant-fhg-widget')
   );
   $args = array(
-      'public' => false,
+      'public' => true,
       'show_ui' => true,
       'labels' => $labels,
       'supports' => array('title', 'editor'),

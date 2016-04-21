@@ -303,11 +303,11 @@ if ($addthis_options['addthis_plugin_controls'] == "AddThis") {
     }
 
 
-    add_filter('language_attributes', 'addthis_language_attributes');
-    function addthis_language_attributes($input)
-    {
-        return $input . ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:addthis="http://www.addthis.com/help/api-spec" ';
-    }
+    // add_filter('language_attributes', 'addthis_language_attributes');
+    // function addthis_language_attributes($input)
+    // {
+    //     return $input . ' xmlns:fb="http://ogp.me/ns/fb#" xmlns:addthis="http://www.addthis.com/help/api-spec" ';
+    // }
 
 
     /**

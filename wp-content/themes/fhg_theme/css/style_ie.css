@@ -1,0 +1,4 @@
+.overviewBoxes .row .tblBox {
+    display: inline-block;
+	float:left;
+}

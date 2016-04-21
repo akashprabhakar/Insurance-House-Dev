@@ -48,71 +48,80 @@ function capm_registration_form_fields() {
 
   ob_start();
   ?>  
-  
 
-  
+
+
   <h3 class="career_header"><?php _e(custom_translate('Register Account', 'تسجيل حساب')); ?></h3>
   <div class="careersApplyFormCont">
-  <?php
-  // show any error messages after form submission
-  capm_show_error_messages();
-  ?>
+    <?php
+    // show any error messages after form submission
+    capm_show_error_messages();
+    ?>
     <form id="capm_registration_form" class="capm_form" action="" method="POST">
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
-            <label for="capm_user_Login"><?php _e(custom_translate('Username', 'اسم المستخدم')); ?></label></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <input name="capm_user_login" id="capm_user_login" class="form-control" type="text"/></div>
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
+          <label for="capm_user_Login"><?php _e(custom_translate('Username*', 'اسم المستخدم*')); ?></label></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <input name="capm_user_login" id="capm_user_login" class="form-control" value="<?php echo $_POST['capm_user_login']; ?>" type="text" required/></div>
+      </div>
+
+
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
+          <label for="capm_user_email"><?php _e(custom_translate('Email*', 'البريد الإلكتروني*')); ?></label></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <input name="capm_user_email" id="capm_user_email" class="form-control" value="<?php echo $_POST['capm_user_login']; ?>" type="email" required/></div>
+      </div>
+
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
+          <label for="capm_user_first"><?php _e(custom_translate('First Name*', 'الاسم الأول*')); ?></label></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <input name="capm_user_first" id="capm_user_first" class="form-control" value="<?php echo $_POST['capm_user_login']; ?>" type="text" required/></div>
+      </div>
+
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"> <label for="capm_user_last"><?php _e(custom_translate('Last Name*', 'اسم العائلة*')); ?></label></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16"><input name="capm_user_last" value="<?php echo $_POST['capm_user_login']; ?>" id="capm_user_last" class="form-control" type="text" required/></div>
+      </div>
+
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"> <label for="password"><?php _e(custom_translate('Password*', 'كلمة المرور*')); ?></label></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16"> <input name="capm_user_pass" id="password" class="form-control" type="password" required/></div>
+      </div>
+
+
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"> <label for="password_again"><?php _e(custom_translate('Password Confirmation*', 'تأكيد كلمة المرور*')); ?></label></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16"><input name="capm_user_pass_confirm" id="password_again" class="form-control" type="password" required/></div>
+      </div>
+
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <div id="RecaptchaFields1" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+          <span style="display:none" class="capspan">Please check the recaptcha. </span>
         </div>
+      </div>
 
-
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
-            <label for="capm_user_email"><?php _e(custom_translate('Email', 'البريد الإلكتروني')); ?></label></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <input name="capm_user_email" id="capm_user_email" class="form-control" type="email"/></div>
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <input type="hidden" name="capm_register_nonce" value="<?php echo wp_create_nonce('capm-register-nonce'); ?>"/>
+          <input type="submit" class="formbtn" value="<?php _e(custom_translate('Register To Apply', 'سجل لتقدم')); ?>"/>
+          <?php
+          if (isset($_GET['id'])) {
+            # code...
+            $queryid = $_GET['id'];
+            $sitecustomurl = SITE_URL . custom_translate('/careers-description/', '/ar/مهن-ويرد-وصف/') . '?id=' . $queryid . '&form=loginfrm'; //print_r($_SERVER); 
+          } else {
+            $sitecustomurl = SITE_URL . custom_translate('/careers/', '/ar/فرص-العمل/') . '?form=loginfrm'; //print_r($_SERVER);
+          }
+          ?>
+          <a href="<?php echo $sitecustomurl; ?>" class="formbtn registerbtn_mrgtop" value="" id="loginbtn"><?php echo custom_translate('Login', 'دخول'); ?></a>
+   <!--             <input type="button" class="formbtn registerbtn_mrgtop" value="<?php echo custom_translate('Login', 'دخول'); ?>" id="loginbtn"> -->
         </div>
-
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
-            <label for="capm_user_first"><?php _e(custom_translate('First Name', 'الاسم الأول')); ?></label></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <input name="capm_user_first" id="capm_user_first" class="form-control" type="text"/></div>
-        </div>
-
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"> <label for="capm_user_last"><?php _e(custom_translate('Last Name', 'اسم العائلة')); ?></label></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16"><input name="capm_user_last" id="capm_user_last" class="form-control" type="text"/></div>
-        </div>
-
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"> <label for="password"><?php _e(custom_translate('Password', 'كلمة المرور')); ?></label></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16"> <input name="capm_user_pass" id="password" class="form-control" type="password"/></div>
-        </div>
-
-
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"> <label for="password_again"><?php _e(custom_translate('Password Confirmation', 'تأكيد كلمة المرور')); ?></label></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16"><input name="capm_user_pass_confirm" id="password_again" class="form-control" type="password"/></div>
-        </div>
-
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <div id="RecaptchaFields2"></div>
-          </div>
-        </div>
-
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <input type="hidden" name="capm_register_nonce" value="<?php echo wp_create_nonce('capm-register-nonce'); ?>"/>
-            <input type="submit" class="formbtn" value="<?php _e(custom_translate('Register To Apply', 'سجل لتقدم')); ?>"/>
-
-
-            <input type="button" class="formbtn registerbtn_mrgtop" value="<?php echo custom_translate('Login', 'دخول'); ?>" id="loginbtn">
-          </div>
-        </div>
+      </div>
     </form>
   </div>
   <?php
@@ -123,43 +132,54 @@ function capm_login_form_fields() {
 
   ob_start();
   ?>
- 
+
   <h3 class="career_header"><?php _e(custom_translate('Login', 'دخول')); ?></h3>
   <div class="careersApplyFormCont">
-  <?php
-  // show any error messages after form submission
-  capm_show_error_messages();
-  ?>
+    <?php
+    // show any error messages after form submission
+    capm_show_error_messages();
+    ?>
     <form id="capm_login_form"  class="capm_form"action="" method="post">
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
-            <label for="capm_user_Login"><?php echo custom_translate('Username', 'اسم المستخدم'); ?></label></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <input name="capm_user_login" id="capm_user_login" class="form-control" type="text"/></div>
-        </div>
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
+          <label for="capm_user_Login"><?php echo custom_translate('Username*', 'اسم المستخدم*'); ?></label></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <input name="capm_user_login" id="capm_user_login" class="form-control" type="text" required/></div>
+      </div>
 
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
-            <label for="capm_user_pass"><?php echo custom_translate('Password', 'كلمة السر'); ?></label> </div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <input name="capm_user_pass" id="capm_user_pass" class="form-control" type="password"/></div>
-        </div>
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16">
+          <label for="capm_user_pass"><?php echo custom_translate('Password*', 'كلمة السر*'); ?></label> </div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <input name="capm_user_pass" id="capm_user_pass" class="form-control" type="password" required/></div>
+      </div>
 
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <div id="RecaptchaFields1"></div>
-          </div>
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <div id="RecaptchaFields1" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+          <span style="display:none" class="capspan">Please check the recaptcha. </span>
         </div>
+      </div>
 
-        <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"></div>
-          <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
-            <input type="hidden" name="capm_login_nonce" value="<?php echo wp_create_nonce('capm-login-nonce'); ?>"/>
-            <input id="capm_login_submit" class="formbtn" type="submit" value="<?php echo custom_translate('Login', 'دخول'); ?>"/>
-            <input type="button" class="formbtn registerbtn_mrgtop" value="<?php _e(custom_translate('Register To Apply', 'سجّل لتقدّم')); ?>" id="registerbtn">
-          </div>
+      <div class="col-lg-16 col-md-16 col-sm-16 col-xs-16 careerFirstForm_mrgn">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-16"></div>
+        <div class="col-lg-12 col-md-12 col-sm-10 col-xs-16">
+          <input type="hidden" name="capm_login_nonce" value="<?php echo wp_create_nonce('capm-login-nonce'); ?>"/>
+          <input id="capm_login_submit" class="formbtn" type="submit" value="<?php echo custom_translate('Login', 'دخول'); ?>"/>
+         <!--  <input type="button" class="formbtn registerbtn_mrgtop" value="<?php _e(custom_translate('Register To Apply', 'سجّل لتقدّم')); ?>" id="registerbtn"> -->
+          <?php
+          if (isset($_GET['id'])) {
+            # code...
+            $queryid = $_GET['id'];
+            $sitecustomurl = SITE_URL . custom_translate('/careers-description/', '/ar/مهن-ويرد-وصف/') . '?id=' . $queryid . '&form=registerfrm'; //print_r($_SERVER); 
+          } else {
+            $sitecustomurl = SITE_URL . custom_translate('/careers/', '/ar/فرص-العمل/') . '?form=registerfrm'; //print_r($_SERVER);
+          }
+          ?>
+          <a href="<?php echo $sitecustomurl; ?>" class="formbtn registerbtn_mrgtop" value="" id="registerbtn"><?php _e(custom_translate('Register To Apply', 'سجّل لتقدّم')); ?></a>
         </div>
+      </div>
     </form>
   </div>
   <?php
@@ -215,7 +235,7 @@ function capm_add_new_member() {
     $user_last = sanitize_text_field($_POST["capm_user_last"]);
     $user_pass = sanitize_text_field($_POST["capm_user_pass"]);
     $pass_confirm = sanitize_text_field($_POST["capm_user_pass_confirm"]);
-    
+
     // this is required for username checks
     require_once(ABSPATH . WPINC . '/registration.php');
 
@@ -296,7 +316,7 @@ function capm_show_error_messages() {
 }
 
 function capm_register_css() {
- // wp_register_style('capm-form-css', plugin_dir_url(__FILE__) . 'includes/css/forms.css');
+  // wp_register_style('capm-form-css', plugin_dir_url(__FILE__) . 'includes/css/forms.css');
 }
 
 add_action('init', 'capm_register_css');

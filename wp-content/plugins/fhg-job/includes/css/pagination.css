@@ -12,6 +12,7 @@
     float: left;
     padding: 3px;
 }
+.errorTextFirstName {display: none;}
 .page_count ul li a {
     color: #21759B;
     text-decoration: none;

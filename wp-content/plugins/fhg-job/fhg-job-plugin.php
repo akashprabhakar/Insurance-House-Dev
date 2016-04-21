@@ -1,5 +1,4 @@
 <?php
-
 /*
   Plugin Name: Manage Jobs
   Description: This plugin is used for adding, editing, deleting and listing the job module at admin the interface.
@@ -59,10 +58,18 @@ function jobs_plugin_activate() {
   PRIMARY KEY (`applicationid`),
   KEY `applicationid` (`applicationid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+
+  $sql_settings = "CREATE TABLE IF NOT EXISTS " . SETTINGS_TABLENAME . " (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `hr_email` varchar(100) NOT NULL
+  ) COMMENT='';";
   require_once(ABSPATH . "wp-admin/includes/upgrade.php");
   dbDelta($sql);
-  
+
   dbDelta($sql_app);
+
+  dbDelta($sql_settings);
 }
 
 /* Hook Plugin */
@@ -104,6 +111,7 @@ function job_Menu() {
   }
 
   add_submenu_page('myplug/fhg-job-plugin.php', 'Applications', 'Applications', 8, 'myplug/fhg-application-plugin.php', 'application_list', '', 102);
+  add_submenu_page('myplug/fhg-job-plugin.php', 'Settings', 'Settings', 8, 'myplug/fhg-settings-plugin.php', 'settings', '', 102);
 
   if (isset($_REQUEST['application_id'])) {
     add_submenu_page('myplug/fhg-application-plugin.php', 'Edit Application', 'Add New Application', 8, 'application_add', 'application_add', '', 102);
@@ -119,7 +127,6 @@ function job_Menu() {
     wp_enqueue_script('jquery-ui.js', JS_INCLUDES_JS . DS . "jquery-ui.js");
     wp_enqueue_style('jquery-ui.css', JS_INCLUDES_CSS . DS . "jquery-ui.css");
     wp_enqueue_style('pagination.css', JS_INCLUDES_CSS . DS . "pagination.css");
-    wp_enqueue_script('jquery.validate.js', JS_INCLUDES_JS . DS . "jquery.validate.js", array('jquery'));
     wp_enqueue_script('job_common.js', JS_INCLUDES_JS . DS . "job_common.js", array('jquery'));
   }
 }
@@ -142,6 +149,10 @@ function job_add() {
 
 function application_add() {
   include(JS_INCLUDES_ADMIN_DIR . DS . 'application-new.php');
+}
+
+function settings(){
+  include(JS_INCLUDES_ADMIN_DIR . DS . 'settings.php');
 }
 
 if (isset($_POST["submit"])) {
@@ -221,50 +232,66 @@ function applynow() {
 
   $insert = $job->insertjobdetails();
 
-
-  if (is_user_logged_in()) {
+  /* Please note the following code should be used when the login functionality is needed ..Dont delete the code 
+    if (is_user_logged_in()) {
     if (isset($_GET['id'])) {
-      $id = $_GET['id'];
-      $jobdetails1 = $job->getjobdetails($id);
+    $id = $_GET['id'];
+    $jobdetails1 = $job->getjobdetails($id);
     } else {
-      $jobdetails1 = '';
+    $jobdetails1 = '';
     }
-     // $job->logout(); 
+    // $job->logout();
     $job->displayform($jobdetails1);
-  } else {
-    echo '<div id="login_form">';
-    echo do_shortcode('[login_form]');
-    echo '</div>';
+    } else {
+    if (isset($_GET['form']) && $_GET['form'] == 'registerfrm') {
+
     echo '<div id="register_form">';
     echo do_shortcode('[register_form]');
     echo '</div>';
+
+    }else{
+    echo '<div id="login_form">';
+    echo do_shortcode('[login_form]');
+    echo '</div>';
+    }
+    } */
+
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $jobdetails1 = $job->getjobdetails($id);
+  } else {
+    $jobdetails1 = '';
   }
+  // $job->logout(); 
+  $job->displayform($jobdetails1);
 }
 
 add_shortcode('applynow', 'applynow');
 
 function getapplicationstatus() {
-  //wp_register('', '');
 
-  $job = new JobApplication;
+  /* ----- Please note the following code gives the status of the applicant which has logged in ..Dont delete the code --- */
 
-  //wp_login_form(); 
-  if (is_user_logged_in()) {
-    $current_user = wp_get_current_user();
-    $username = $current_user->display_name;
-    $userapplications = $job->displayuserapp($username);
-     $job->logout();
-    if (count($userapplications) > 0) {
-      $job->displayapps($userapplications);
-    }
-  } else {
-    echo '<div id="login_form">';
-    echo do_shortcode('[login_form]');
-    echo '</div>';
-    echo '<div id="register_form">';
-    echo do_shortcode('[register_form]');
-    echo '</div>';
-  }
+  // $job = new JobApplication;
+  // if (is_user_logged_in()) {
+  //   $current_user = wp_get_current_user();
+  //   $username = $current_user->display_name;
+  //   $userapplications = $job->displayuserapp($username);
+  //    $job->logout();
+  //   if (count($userapplications) > 0) {
+  //     $job->displayapps($userapplications);
+  //   }
+  // } else {
+  //   if (isset($_GET['form']) && $_GET['form'] == 'registerfrm') {
+  //     echo '<div id="register_form">';
+  //     echo do_shortcode('[register_form]');
+  //     echo '</div>';
+  //   }else{
+  //     echo '<div id="login_form">';
+  //     echo do_shortcode('[login_form]');
+  //     echo '</div>';
+  //   }
+  // }
 }
 
 add_shortcode('applicationstatus', 'getapplicationstatus');
@@ -282,106 +309,119 @@ function show_job_desc() {
   $job_description_ar = $arrresult[0]->job_description_ar;
   $url = get_url();
 
-  $display_carrer = '<div class="container">';
-  $display_carrer .= '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
-  $display_carrer .= '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-16 innerpageContent careers cjoblisting">';
-  $display_carrer .= '<div class="careersDetailsCont">';
-  $display_carrer .= '<div class="careersDetailBox">';
-  $display_carrer .= '<div class="topborder">&nbsp;</div>';
-  $display_carrer .= '<div class="careersPosition">' . custom_translate($job_title, $job_title_ar) . '</div>';
-  $display_carrer .= '<div class="openingLocation">' . custom_translate($job_location, $job_location_ar) . '</div>';
-  $display_carrer .= '<span class="'.custom_translate("glyphicon glyphicon-menu-left","glyphicon glyphicon-menu-right").'">';
-  $display_carrer .= '<a href="' . $url . custom_translate('careers', 'فرص-العمل') . '">' . custom_translate('Back to Job Listing', 'عودة إلى قائمة الوظائف') . '</a></span>';
+  echo do_shortcode('[show_success_msg]');
+  $display_carrer = '<div class="center row detailContainer_top hidecontent">';
+  $display_carrer .= '<h1>' . custom_translate($job_title, $job_title_ar) . '</h1>';
+  $display_carrer .= '<p>' . custom_translate($job_location, $job_location_ar) . '</p>';
+  //$display_carrer .= '<span class="' . custom_translate("glyphicon glyphicon-menu-left", "glyphicon glyphicon-menu-right") . '">';
+ // $display_carrer .= '<a href="' . $url . custom_translate('careers', 'فرص-العمل') . '">' . custom_translate('Back to Job Listing', 'عودة إلى قائمة الوظائف') . '</a></span>';
   $display_carrer .= '</div>';
-  $display_carrer .= '</div>';
-  $display_carrer .= '</div>';  
-  $display_carrer .= '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
-  $display_carrer .= '</div>';
-  
 
-  $display_carrer .= '<div class="container">';
-  $display_carrer .= '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
-  $display_carrer .= '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-16  careersDetailResponsibilities">';
+
+  //$display_carrer .= '<div class="row">';
+  $display_carrer .= '<div class="innerCommonpageText_img hidecontent">';
 
   $display_carrer .= custom_translate($job_description, stripslashes($job_description_ar));
-  
+
   // $display_carrer .= '<div  name="' . $job_id . '"' . 'id="' . $job_id . '"' . 'class="apply_now text-center"><a href="#" onclick="return false;" id="appnowbtn">' . custom_translate('Apply Now', 'دخول') . '</a></div>';
   $display_carrer .= '</div>';
-  $display_carrer .= '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
-  $display_carrer .= '</div>';
-  echo $display_carrer;
 
-  echo '<div class="container">';
-  echo'<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
-  echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-16 innerpageContent careers">';
+  //$display_carrer .= '</div>';
+  echo $display_carrer;
+  echo '<div class="apply_now hidecontent"><a href="#" class="applylink" onclick="return false;" id="appnowbtn">';
+  echo custom_translate('Apply Now', 'دخول');
+  echo '</a></div>';
+  echo '<div class="carerrFormMainContainer hidecontent">';
   echo do_shortcode('[applynow]');
   echo'</div>';
-  echo'<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
-  echo'</div>';
-  
+ // echo'<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
+ // echo'</div>';
+}
+add_shortcode('show_job_desc_sc', 'show_job_desc');
+  function careersform(){
+    echo '<div class="carerrFormMainContainer hidecontent">';
+    echo do_shortcode('[applynow]');
+    echo'</div>';
+  }
+add_shortcode('careersform', 'careersform');
 
+function application_success() {
+  $suc_cont = custom_translate("Your application has been recieved. ", "Your application has been recieved.");
+  $suc_content = custom_translate("We will get back to you soon after reviewing your details.", "We will get back to you soon after reviewing your information.");
+  $display_carrer = '<div class="showcontent center row detailContainer_top" style="display:none;">';
+  $display_carrer .= '<h1>' . $suc_cont . '</h1>';
+  $display_carrer .= '<p>' . $suc_content . '</p>';
+  $display_carrer .= '<span class="' . custom_translate("glyphicon glyphicon-menu-left", "glyphicon glyphicon-menu-right") . '">';
+  $display_carrer .= '<a href="' . SITE_URL.DS . custom_translate('en/career', 'ar/career') . '">' . custom_translate('Back to Job Listing', 'عودة إلى قائمة الوظائف') . '</a></span>';
+  $display_carrer .= '</div>';
+
+  echo $display_carrer;
 }
 
-add_shortcode('show_job_desc_sc', 'show_job_desc');
+add_shortcode('show_success_msg', 'application_success');
 
 //SHOW JOB LISTING
-function show_job_listing() {
+function show_job_listing( $atts) {
   $objMem2 = new jobClass();
-  
+  extract( shortcode_atts( array(
+        'openingscount' => -1
+
+    ), $atts ) );
 
   $arrresult = $objMem2->get_career_description();
-  if(count($arrresult) > 0){
+  if (count($arrresult) > 0) {
     ?>
-     <div class="careersOpeningCont">
-     <h1><?php echo custom_translate('Current openings','الوظائف الشاغرة');?></h1>
-              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>
+
     <?php
-    $counter = 0; 
+    $counter = 0;
+    $no=1;
     foreach ($arrresult as $key => $val) {
-    $job_id = $val->job_id;
-    $job_title = $val->job_title;
-    $job_title_ar = $val->job_title_ar;
-    $job_location = $val->job_location;
-    $job_location_ar = $val->job_location_ar;
+      $job_id = $val->job_id;
+      $job_title = $val->job_title;
+      $job_title_ar = $val->job_title_ar;
+      $job_location = $val->job_location;
+      $job_location_ar = $val->job_location_ar;
 
-      if($counter==0) {?>
      
-      
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-16 careersOpeningleft">
+        ?>
+          <div class="missionContentBox ">
+            <div class="hc-b1-faq">
+              <a href="<?php echo $url . custom_translate('careers-description', 'careers-description-ar') . '/?id=' . $job_id; ?>"><img class="alignnone wp-image-7852 size-full" src="<?php echo plugins_url().'/fhg-job/includes/uploads/'.$val->imageurl?>" alt="" width="246" height="279"></a>
 
-                  <div class="careersOpeningDetail">
-            <div class="topborder">&nbsp;</div>
-            <div class="careersPosition">
-            <?php 
-              $url = get_url();             
-              echo '<a href="' . $url . custom_translate('careers-description', 'مهن-ويرد-وصف') . '/?id=' . $job_id . '">' . custom_translate($job_title, $job_title_ar) . '</a>';
-              ?></div>
-            <div class="openingLocation"><?php echo custom_translate($job_location, $job_location_ar); ?> </div>
-            <a class="careerArrow" href="#"></a> </div>
-                </div>
+              <div>
+                <h1><a href="<?php echo $url . custom_translate('careers-description', 'careers-description-ar') . '/?id=' . $job_id; ?>"><?php echo custom_translate($job_title, $job_title_ar);?></a></h1>
+                <p><?php echo get_the_content_with_mytrim($val->job_description,10); ?></p>
+                <p><a href="<?php echo $url . custom_translate('careers-description', 'careers-description-ar') . '/?id=' . $job_id; ?>">Learn More</a></p>
+              </div>
+            </div>
+          </div>
+            <?php  
+              if($no == 2 && ($openingscount != -1)){
+                break;
+              }
+            $no++;
+          }
+            ?>
 
-                <?php $counter= 1; }else if($counter== 1) { ?> 
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-16 careersOpeningRight">
-                  <div class="careersOpeningDetail">
-            <div class="topborder">&nbsp;</div>
-            <div class="careersPosition">
-            <?php 
-              $url = get_url();
-              echo '<a href="' . $url . custom_translate('careers-description', 'مهن-ويرد-وصف') . '/?id=' . $job_id . '">' . custom_translate($job_title, $job_title_ar) . '</a>';
-             ?></div>
-            <div class="openingLocation"><?php echo custom_translate($job_location, $job_location_ar); ?></div>
-            <a class="careerArrow" href="#"></a></div>
-                </div>
-                
-  
-    <?php 
-$counter= 0;
-        }
-    }?>
+    <?php
+    }
 
-<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>
-            </div> 
-  <?php }
+    // echo '<div class="container hidecontent">';
+    // echo '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
+    // echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-16 innerpageContent careers">';
+    // echo do_shortcode('[applynow]');
+    // echo'</div>';
+    // echo'<div class="col-lg-2 col-md-2 col-sm-2 col-xs-16"></div>';
+    // echo'</div>';
+  }
+
+  add_shortcode('show_job_listing_sc', 'show_job_listing');
+
+
+function fhg_job_enqueue_script() {
+
+    wp_enqueue_script( 'my-js', get_template_directory_uri() . '/js/jquery.validate.min.js', false );
+
 }
-add_shortcode('show_job_listing_sc', 'show_job_listing');
-?>
+add_action( 'wp_enqueue_scripts', 'fhg_job_enqueue_script' );
+  ?>

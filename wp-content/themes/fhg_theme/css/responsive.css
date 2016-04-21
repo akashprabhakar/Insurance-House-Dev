@@ -1,0 +1,610 @@
+@media (min-width: 1220px) {
+.container {
+	max-width: 1220px;
+	width: 100%;
+}
+}
+@media (max-width: 1400px){
+.eventdetailMain {
+    padding: 60px 130px;
+}
+}
+@media (max-width: 1320px) {
+.topBtn {
+	margin-right: 0;
+	position: relative;
+	margin-left: 17px;
+}
+#image-gallery {
+    padding: 20px 20px 40px;
+}
+}
+ @media (max-width: 1220px) {
+.container {
+	max-width: 1220px;
+	width: 100%;
+}
+.boxContainer {
+	padding: 20px;
+}
+#footer .footerInner {
+	padding: 0;
+}
+.newsSection {
+	padding: 0 15px;
+}
+#bottom {
+	padding: 40px 15px;
+}
+#bottom .column {
+	width: 31%;
+	margin: 0 2% 30px 0;
+}
+#bottom .col-lg-12 {
+	width: 25%;
+	float: left;
+	padding: 0;
+}
+#bottom .socialMediaContainer .col-xs-12, #bottom .socialMediaContainer .col-md-6 {
+	width: 100%;
+	float: left;
+	padding: 0;
+}
+#bottom .socialMediaContainer {
+	width: 100%;
+}
+#bottom ul li a br {
+	display: none;
+}
+.slide .carousel-caption {
+	top: 130px;
+}
+.overviewBoxContainer, .ccf_Boxcontainer, .fd_Boxcontainer {
+	margin-left: 0;
+	margin-right: 0;
+}
+}
+ @media screen and (max-width: 1040px) {
+.overviewBoxContainer .overviewBoxContainer_two h1 {
+	padding: 15px 25px;
+}
+.overviewBoxContainer .overviewBoxContainer_two p {
+	padding: 0 25px 15px 25px;
+}
+.overviewBoxContainer .overviewBoxContainer_two ul {
+	padding: 0 25px 15px 25px;
+}
+.overviewBoxContainer .overviewBoxContainer_two .ccf_learmore {
+	padding: 0 0 0 25px;
+}
+.overviewBoxContainer .overviewBoxContainer_two img {
+	padding: 0 0 0 25px;
+}
+.overviewBoxContainer .overviewBoxContainer_one img {
+	padding: 0 25px 0 0;
+}
+.overviewBoxContainer .overviewBoxContainer_one h1 {
+	padding: 15px 25px;
+}
+.overviewBoxContainer .overviewBoxContainer_one p {
+	padding: 0 25px 15px 25px;
+}
+.overviewBoxContainer .overviewBoxContainer_one ul {
+	padding: 0 25px 15px 25px;
+}
+}
+ @media screen and (max-width: 1024px) {
+.dmbs-footer .contactLeftContainer {padding: 0px;}	 
+.overviewBoxContainer .overviewBoxContainer_two h1 a, .overviewBoxContainer .overviewBoxContainer_one h1 a {
+	font-size: 30px;
+}
+.cardDtlsBox .bottomCardDtlsLink ul .col-md-4 {
+	width: 33.02%;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnLeft {
+    height: auto;
+    left: 0;
+    margin-top: 0;
+    position: absolute;
+    width: auto;
+    margin-left: 60px;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnRight {
+    height: auto;
+    margin-top: 0 ;
+    position: absolute;
+    right: 0;
+    width: auto;
+    margin-right: 60px;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnLeft::before {
+    width: 50px;
+    border-bottom: none;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnRight::before {
+    width: 50px;
+    border-bottom: none;
+    float: right;
+}
+.eventdetailMain {
+    padding: 80px 60px 60px;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnLeft a:before {
+    padding: 27px 15px 0 0;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnRight a:before {
+    padding: 25px 0 0 15px;
+}
+.contactmobileslider, .socialmediafeed_container {
+    display: block;
+    position: relative;
+    float: left;
+    width: 100%;
+    background: #f9f9f9;
+	/*padding: 0;*/
+}
+.contactmobileslider a, .contactmobileslider a:focus, .contactmobileslider a:hover {
+    background: #036d10;
+    color: #fff;
+    text-align: center;
+    font-weight: 300;
+    padding: 10px 0;
+    margin: 0;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 0;
+}
+.contactmobileslider #contactformmobile {
+    padding: 20px 20px;
+}
+.contactmobileslider #contactformmobile p:nth-child(2) {
+    float: left;
+    width: 50%;
+    padding-right: 1.5%;
+}
+.contactmobileslider #contactformmobile p:nth-child(3) {
+    float: left;
+    width: 50%;
+    padding-left: 1.5%;
+}
+.contactmobileslider #contactformmobile p input, .contactmobileslider #contactformmobile p textarea {
+    border: 1px solid #5eb3db;
+    font-size: 14px;
+    font-family: 'ralewaylight';
+    color: #7d7d7d;
+    padding: 6px 15px;
+    width: 100%;
+    resize: none;
+    margin-top: 0;
+}
+.contactmobileslider #contactformmobile p input.contactSubmit:hover {
+    background: url(../images/ApplyCardArrow.png) no-repeat 23px 16px #1a93cc;
+}
+.contactmobileslider #contactformmobile p input.contactSubmit {
+    font-size: 18px;
+    font-weight: normal;
+    font-family: "ralewaysemibold";
+    color: #ffffff;
+    padding: 17px 27px 17px 58px;
+    display: block;
+    width: auto;
+    float: left;
+    background: url(../images/ApplyCardArrow.png) no-repeat 23px 16px #16547d;
+    border-radius: 7px;
+    border: 0;
+}
+.socialmediafeed_container .nav-social {
+    background: #eae7e7;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.socialmediafeed_container ul.nav-social li {
+    margin: 0;
+    display: inline;
+    text-align: center;
+}
+.socialmediafeed_container ul.nav-social li .fa {
+    padding: 15px 17px ;
+    font-size: 28px;
+    text-align: center;
+    float: none;
+    margin: 0;
+    color: #00700e;
+}
+.socialmediafeed_container ul.nav-social li .fa:hover {
+    background: #00700e;
+    color: #fff ;
+}
+.slide-out-div1 {
+    width: 96% !important;
+    padding: 2%;
+    background: none;
+    min-height: 177px;
+    float: left;
+    display: none;
+    top: 5px !important;
+}
+.slide-out-div {
+    display: none;
+}
+.socialFeeds .closeBtn {
+    float: right;
+    padding: 7px;
+    margin-top: -47px;
+}
+.socialFeeds .closeBtn .fa-times {
+    color: #000;
+    font-size: 17px;
+    width: 25px;
+    height: 26px;
+    border-radius: 12px;
+    padding: 0 0 0 6px;
+    cursor: pointer;
+}
+}
+@media (max-width: 990px) {
+#footer {
+	padding: 15px;
+}
+#mega-menu-wrap-header_top_menu {
+	float: right;
+}
+#mega-menu-wrap-header_top_menu .mega-menu-toggle {
+	display: block;
+	background: #009BDA;
+	border-radius: 0;
+	border-left: 1px solid #00426A;
+	z-index: 77777;
+	position: relative;
+}
+.slide .carousel-caption {
+	top: 85px;
+}
+.overviewBoxContainer {
+	margin: 20px 0 0;
+}
+.overviewBoxContainer .overviewBoxContainer_inner .arrow_leftOne {
+	display: none;
+}
+.overviewBoxContainer .overviewBoxContainer_inner img, .overviewBoxContainer div:nth-child(2) img, .overviewBoxContainer div:nth-child(3) img, .fd_Boxcontainer .fd_Boxcontainer_one img {
+	width: 100%;
+	padding: 0;
+    height: auto;
+}
+.overviewBoxContainer .overviewBoxContainer_inner h1 {
+	padding: 20px;
+	float: left;
+	width: 100%;
+}
+.overviewBoxContainer .overviewBoxContainer_inner p {
+	padding: 0 20px 20px;
+	float: left;
+	width: 100%;
+}
+.overviewBoxContainer .overviewBoxContainer_inner .ccf_learmore {
+	padding: 0 0 20px 20px;
+}
+.overviewBoxContainer .overviewBoxContainer_inner {
+	margin: 20px 0;
+}
+.overviewBoxes .row .twoBox {
+	width: 50%;
+}
+.overviewBoxes .row .tblBox.col-md-3 {
+	float: left;
+	width: 50%;
+	margin:20px 0;
+}
+.overviewBoxes .row .tblBox.col-md-3:nth-child(3) {
+	clear: left;
+}
+.missionContentBox .hc-b1-faq > a {
+	float: left;
+	width: 50%;
+	padding-right: 0;
+	margin: 0 25%;
+}
+.missionContentBox .hc-b1-faq > div {
+	float: left;
+	width: 100%;
+	margin: 0;
+	padding-bottom: 20px;
+}
+.missionContentBox .hc-b1-faq {
+	padding: 0 20px;
+}
+.missionContentBox .hc-b1-faq h1, .missionContentBox .hc-b1-faq p, .missionContentBox .hc-b1-faq p a {
+	text-align: left;
+}
+.banner .headingBG h1 {
+	font-size: 36px;
+}
+.msgchairmanContainer .innerCommonpageText_img img {
+    width: 47%;
+    float: right;
+    padding: 0 0 0 2%;
+}
+.overviewBoxes .thumbnail h2{
+	font-size:20px;
+	}
+.newslistingcontainer .pastEvtContainer ul li .detailpast .right {
+    width: 100%;
+    float: left;
+    padding: 0 20px 20px ;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnLeft {
+    left: 1%;
+    margin-left: 5px;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnRight {
+    right: 1%;
+    margin-right: 5px;
+}
+.arrowmaincontainer .arrowcontainer div:before{
+	height:60px;
+	}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnLeft a:before {
+    padding: 20px 15px 0 0;
+}
+.arrowmaincontainer .arrowcontainer .eventDetprebtnRight a:before {
+    padding: 18px 0 0 15px;
+}
+.eventdetailMain {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.leftColmp .img-block {
+    width: 48%;
+}
+.leftColmp .img-block img {
+    width: 100%;
+    height: auto;
+}
+.mediaGallery ul li {
+    width: 50%;
+}
+}
+@media screen and (max-width: 850px) {
+.cardDtlsBox .bottomCardDtlsLink ul .col-md-4 {
+	width: 32.97%;
+}
+}
+@media (max-width: 800px) {
+.center p, .msgchairmanContainer .innerCommonpageText_img .center p {
+	padding: 0 0 20px;
+}
+#recent-works .box1, #recent-works .box4, #recent-works .box10, #recent-works .box7, #recent-works .box8 {
+	width: 100%;
+}
+#recent-works .box2, #recent-works .box3, #recent-works .box5, #recent-works .box6 {
+	width: 50%;
+}
+#recent-works .box5 {
+	margin-top: 0;
+}
+#recent-works .box6 {
+	margin-top: 0;
+	margin-left: 0;
+}
+.rightNewsBox {
+	padding-left: 0;
+}
+.leftNewsBox.col-sm-4, .rightNewsBox.col-sm-8 {
+	width: 100%;
+}
+#conatcat-info .col-xs-12 {
+	margin: 12px 0;
+}
+#bottom {
+	padding: 40px 20px;
+}
+#bottom .column {
+	margin: 10px 5% 10px 0;
+	width: 45%;
+}
+#bottom .col-lg-12 {
+	margin: 10px 5% 10px 0;
+	width: 45%;
+}
+#footer .footerInner .col-md-6, #footer .footerInner .col-md-6 .footerLink {
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin: 3px 0;
+}
+}
+@media (max-width: 768px) {
+.online-banking {
+	width: 63px;
+}
+.online-banking a span {
+	display: none;
+}
+.slide .carousel-caption {
+	position: relative;
+	top: 0;
+	margin: 0 5% 40px;
+	display: block;
+	float: left;
+	width: 90%;
+	left: 0;
+}
+.carousel-control.left span, .carousel-control.right span, .carousel-control.left span:hover, .carousel-control.right span:hover {
+	width: 60px;
+	height: 105px;
+	background-size: 43% 66%;
+	background-position: 50%;
+}
+.navbar-inverse .navbar-brand {
+	position: relative;
+	margin: -42px 0 -42px 0;
+	z-index: 999;
+	padding: 0;
+}
+.missionContentBox {
+	width: 100%;
+	margin: 10px 0;
+}
+.missionContentBox .hc-b1-faq > a {
+	display: table-cell;
+	width: 35%;
+	margin: 0;
+	float: none;
+}
+.missionContentBox .hc-b1-faq > div {
+	float: none;
+	width: 65%;
+	display: table-cell;
+}
+.management-team .welcome-text p{
+    padding: 0 15px 40px;
+	}
+.management-team .welcome-text p + p{
+    padding: 0 15px 20px;
+	}
+.msgchairmanContainer .innerCommonpageText_img img {
+    width: 100%;
+    float: right;
+    padding: 0 0 2% 0;
+}
+.overviewBoxes .row .tblBox {
+	width: 49%;
+	display: inline-block;
+	margin:20px 0;
+}
+.newslistingcontainer .pastEvtContainer ul li {
+    width: 100%;
+    height: auto;
+}
+.emirates-dropdown .btn-group > .btn-default {
+    width: 102px;
+}
+.emirates-dropdown .btn-group > .dropdown-toggle {
+    width: 30px;
+}
+.mediaKit_Boxcontainer_one div, .mediaKit_Boxcontainer_one img{
+	width:100%;
+	margin-right:0;
+	}
+}
+ @media screen and (max-width: 767px) {
+.commonInnerPage_container .innerinvcontact .contactLeftContainer p:nth-child(2n+1) {width: 100%;margin-bottom: 20px;}
+.commonInnerPage_container .innerinvcontact .contactLeftContainer p:nth-child(2n) {margin-right: 0;width: 100%;}
+.dmbs-footer .contactLeftContainer {padding: 0px;}	 
+.innerinvcontact p {padding: 0 20px 0;}
+.cardDtlsBox .nav-tabs {margin: -16px 15px 0;}
+.cardDtlsBox .nav-tabs > li {margin: 0 0 5px;width: 100%;}
+.cardDtlsBox .nav-tabs > li a br {display: none;}
+.cardDtlsBox div + div.bottomCardDtlsLink {position: relative;bottom: 0;}
+.cardDtlsBox .bottomCardDtlsLink ul {margin: 15px 0;}
+.cardDtlsBox .bottomCardDtlsLink ul .col-md-4 {width: 100%;float: left;display: block;margin: 10px 0 0;}
+.cardDtlsBox .bottomCardDtlsLink ul a {margin-top: 0;}
+.banner .headingBG {padding: 0px 36px 2px 40px;}
+.banner .headingBG h1 {font-size: 12px;margin-top: 10px;}
+.breadcrumsBG .breadcrumb {padding: 5px 0px 5px;}
+.breadcrumsBG .col-xs-12 {padding: 0;}
+.breadcrumsBG .rightbreadcrumb .sharenetcontainer {float: left;padding: 5px 0px 5px ;}
+.overviewBoxes .customarrow .thumbnail h2 {font-size: 20px;}
+.divpagination .pagination > li > a, .divpagination .pagination > li > span {font-size: 13px;padding: 1px 5px;}
+.divpagination .pagination > li:last-child > a:hover, .divpagination .pagination > li:last-child > a {
+    width: 67px;
+    height: 22px;
+	background-size: 100%;
+}
+.leftColmp .img-block {
+    margin: 5px 0 20px 0;
+    width: 100%;
+}
+.slide-out-div {
+    display: none !important;
+}
+}
+@media screen and (max-width: 700px) {
+.overviewBoxes .row {
+	text-align: center;
+}
+}
+ @media (max-width: 640px) {
+.contactLeftContainer.col-xs-6, .contactRightContainer.col-xs-6 {width: 100%;}	 
+#polylang-3 ul li a {
+	padding: 2px 8px 2px 0;
+}
+#header .top-bar .call-srch a.last {
+	margin: 6px 0;
+	padding: 0 10px;
+}
+#header .col-md-12 {
+	padding: 0;
+}
+#recent-works .box2, #recent-works .box3, #recent-works .box5, #recent-works .box6 {
+	width: 100%;
+}
+.navbar-header {
+	float: left;
+}
+#mega-menu-wrap-header_top_menu .mega-menu-toggle {
+	margin-right: 10px;
+}
+.missionContentBox .hc-b1-faq > a {
+	float: left;
+	width: 50%;
+	padding-right: 0;
+	margin: 0 25%;
+}
+.missionContentBox .hc-b1-faq > div {
+	float: left;
+	width: 100%;
+	margin: 0;
+	padding-bottom: 20px;
+}
+.missionContentBox .hc-b1-faq {
+	padding: 0 20px;
+}
+
+.mediaGallery ul li {
+    width: 100%;
+}
+}
+@media screen and (max-width: 500px) {
+.overviewBoxes .row .tblBox, .overviewBoxes .row .tblBox.col-md-3 {
+	width: 100%;
+}
+}
+@media (max-width: 480px) {
+#bottom .column, #bottom .col-lg-12 {
+	margin: 10px 0;
+	width: 100%;
+}
+.navbar-brand > img {
+	display: block;
+	width: 130px;
+	height: auto;
+}
+.navbar-inverse .navbar-brand {
+	margin-left: 0;
+	float: left;
+	height: auto;
+}
+.navbar {
+	min-height: 40px;
+}
+.carousel-control.left span, .carousel-control.right span, .carousel-control.left span:hover, .carousel-control.right span:hover {
+	width: 30px;
+	height: 55px;
+	float: left;
+}
+}
+@media screen and (min-width: 768px) and (max-width: 990px){
+.commonInnerPage_container .innerinvcontact .contactLeftContainer p:nth-child(7){ width: 100%;font-size: 14px;}	
+.commonInnerPage_container .innerinvcontact .contactLeftContainer p:nth-child(8) {width: 100%;margin-right: 0px;}
+	.dmbs-footer .contactLeftContainer {
+		padding: 0px;
+	}
+	.slide-out-div {
+		display: none;
+	}
+}
